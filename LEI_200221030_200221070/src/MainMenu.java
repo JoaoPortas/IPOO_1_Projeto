@@ -27,6 +27,11 @@ public class MainMenu {
         return this.isActive;
     }
 
+    /**
+     * 
+     * @param title Titlo a exibir
+     * @param options Opções a exibir
+     */
     private void printMenu(String title,String[] options){
         System.out.print('+');
         for (int a = 0; a < title.length() + 10;a++){
