@@ -114,19 +114,20 @@ public class User {
         }
     }
 
-    public void addGenerateID(String generatedID) {
-        if (generatedID != null) {
-            LocalDate nowDate = LocalDate.now();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/uuuu");
-            String formatedDate = nowDate.format(formatter);
-            String[] newGeneratedIDs = Arrays.copyOf(this.generatedIDs, this.generatedIDs.length + 1);
+    /**
+     * Gera e adiciona um novo ID e adiciona á lista de IDs gerados
+     * 
+     */
+    public void addGenerateID() {
+        LocalDate nowDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/uuuu");
+        String formatedDate = nowDate.format(formatter);
 
-            newGeneratedIDs[this.generatedIDs.length] = generatedID + " - " + formatedDate;
+        String[] newGeneratedIDs = Arrays.copyOf(this.generatedIDs, this.generatedIDs.length + 1);
 
-            this.generatedIDs = Arrays.copyOf(newGeneratedIDs, newGeneratedIDs.length);
+        newGeneratedIDs[this.generatedIDs.length] = RandomCodeGenerator.generateUniqueCode() + " - " + formatedDate;
 
-            System.out.println(this.generatedIDs[this.generatedIDs.length - 1]);
-        }
+        this.generatedIDs = Arrays.copyOf(newGeneratedIDs, newGeneratedIDs.length);
     }
     
 }

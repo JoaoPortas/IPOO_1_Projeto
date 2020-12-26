@@ -44,20 +44,17 @@ public class LEI_200221030_200221070 {
     public void idkeyz() {
         User user1 = new User(111111111, UserState.INFECTED);
 
-        user1.addGenerateID("a");
-        user1.addGenerateID("b");
-        user1.addGenerateID("c");
-        user1.addGenerateID("d");
-        user1.addGenerateID("e");
-        user1.addGenerateID("f");
-        user1.addGenerateID("g");
-        user1.addGenerateID("h");
-        user1.addGenerateID("i");
-        user1.addGenerateID("j");
-    }
-    
-    
-    
+        user1.addGenerateID();
+        user1.addGenerateID();
+        user1.addGenerateID();
+        user1.addGenerateID();
+        user1.addGenerateID();
+        user1.addGenerateID();
+        user1.addGenerateID();
+        user1.addGenerateID();
+        user1.addGenerateID();
+        user1.addGenerateID();        
+    }    
     
     public void closeApplication(){
         System.out.println("+---------------------------------------+");

@@ -1,7 +1,8 @@
-//import java.security.SecureRandom;
+import java.util.UUID;
 
 public class RandomCodeGenerator {
-    /*public String un() {
-        //String unique = UUID.randomUUID().toString();
-    }*/
+    public static String generateUniqueCode() {
+        UUID unique = UUID.randomUUID();
+        return (String)unique.toString();
+    }
 }
