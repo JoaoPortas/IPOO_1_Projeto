@@ -125,7 +125,7 @@ public class User {
 
             this.generatedIDs = Arrays.copyOf(newGeneratedIDs, newGeneratedIDs.length);
 
-            //System.out.println(this.generatedIDs[this.generatedIDs.length - 1]);
+            System.out.println(this.generatedIDs[this.generatedIDs.length - 1]);
         }
     }
     
