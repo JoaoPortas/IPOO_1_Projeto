@@ -28,14 +28,22 @@ public class MainMenu {
     }
 
     private void printMenu(String title,String[] options){
-        System.out.println("+-----------------------------------------+");
+        System.out.print('+');
+        for (int a = 0; a < title.length() + 10;a++){
+            System.out.print('-');
+        }
+        System.out.print("+\n");
         System.out.println("     " + title + "              ");
         System.out.println("                                          ");
         for(int a = 0; a < options.length;a++){
             System.out.println("  " + (a + 1) + " - " + options[a]);
         }
         System.out.println("                                          ");
-        System.out.println("+-----------------------------------------+");
+        System.out.print('+');
+        for (int a = 0; a < title.length() + 10;a++){
+            System.out.print('-');
+        }
+        System.out.print("+\n");
     }
 
     private void menuHandler(){

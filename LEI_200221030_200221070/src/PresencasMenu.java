@@ -32,15 +32,23 @@ public class PresencasMenu {
         return this.isActive;
     }
 
-    private void printMenu(String title,String[] options){
-        System.out.println("+-----------------------------------------+");
+   private void printMenu(String title,String[] options){
+        System.out.print('+');
+        for (int a = 0; a < title.length() + 10;a++){
+            System.out.print('-');
+        }
+        System.out.print("+\n");
         System.out.println("     " + title + "              ");
         System.out.println("                                          ");
         for(int a = 0; a < options.length;a++){
             System.out.println("  " + (a + 1) + " - " + options[a]);
         }
         System.out.println("                                          ");
-        System.out.println("+-----------------------------------------+");
+        System.out.print('+');
+        for (int a = 0; a < title.length() + 10;a++){
+            System.out.print('-');
+        }
+        System.out.print("+\n");
     }
 
     private void menuHandler(){
@@ -49,7 +57,7 @@ public class PresencasMenu {
             "Terminar Aula",
             "Sair",
         };
-        printMenu("Bem Vindo ao Sistema de rastreio",options);
+        printMenu("Registo de presenças na aula",options);
         int response = getResponse();
         switch(response){
             case 1:
@@ -77,17 +85,25 @@ public class PresencasMenu {
 
     private boolean registerPresence(){
         String[] opcoes = {"Cancelar"};
-        printMenu("Registo de Presença na sala de aula", opcoes);
+        printMenu("Insira o nº do Aluno ou uma das seguintes opções", opcoes);
         int response = getResponse();
         switch(response){
             case 1:
                 menuHandler();
                 break;
             default:
-                System.out.println("Opção Inválida, prima 'enter' para continuar");
-                this.inputReader.nextLine();
-                menuHandler();
+                if (String.valueOf(response).length() != 9){
+                    System.out.println("Opção Inválida, prima 'enter' para continuar");
+                    this.inputReader.nextLine();
+                    menuHandler();
+                }else{
+                    opcoes = new String[]{};
+                    printMenu("Utilizador Registado Com Sucesso",opcoes);
+                    System.out.println("Prima 'enter' para continuar");
+                    this.inputReader.nextLine();
+                }
                 break;
+                
         }
         return true;
     }
