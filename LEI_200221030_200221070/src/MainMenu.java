@@ -1,11 +1,14 @@
-
-
+/**
+ * Class MainMenu representa o menu principal
+ * @author João Gouveia e João Portas
+ */
 public class MainMenu {
     
     InputReader inputReader;
     boolean isActive = false;
     LEI_200221030_200221070 mainActivity;
     int currentlyAvailableOptions;
+    
     public MainMenu(LEI_200221030_200221070 mainActivity){
         if (this.isActive == false){
             if (this.mainActivity == null){
@@ -19,7 +22,6 @@ public class MainMenu {
         this.isActive = true;
         this.menuHandler();
     }
-
 
     public boolean isActive(){
         return this.isActive;
