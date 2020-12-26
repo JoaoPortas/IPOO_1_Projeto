@@ -1,12 +1,5 @@
 public class UserMenu {
     
-    public static void main(String[] args){
-        UserMenu menu = new UserMenu();
-        menu.drawMenu();
-        menu.getResponse();
-    }
-
-
     private InputReader reader;
     private int userId = -1;
     public UserMenu(){
