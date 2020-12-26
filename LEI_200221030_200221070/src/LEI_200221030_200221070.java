@@ -13,40 +13,30 @@ public class LEI_200221030_200221070 {
     /**
      * @param args the command line arguments
      */
+    
+    
+    MainMenu mainMenu;
+    PresencasMenu presencasMenu;
+    
     public static void main(String[] args) {
 
-        LEI_200221030_200221070 lol  = new LEI_200221030_200221070();
+        
+        LEI_200221030_200221070 mainClass = new LEI_200221030_200221070();
+        mainClass.mainMenu = new MainMenu(mainClass);
+        mainClass.presencasMenu = new PresencasMenu(mainClass);
+        
+        
         InputReader reader = new InputReader();
         int what = reader.getIntegerNumber("Quem");
         if (what == 1){
-            lol.joao();
+            mainClass.joao();
         }else{
-            lol.idkeyz();
+            mainClass.idkeyz();
         }
     }
 
     public void joao(){
-        MainMenu mainMenu = new MainMenu();
-        mainMenu.drawMenu();
-        int response = mainMenu.getResponse();
-        switch(response){
-            case 1:
-                System.out.println("1");
-                break;
-                case 2:
-                    System.out.println("2");
-                    break;
-                    case 3:
-                        System.out.println("3");
-                        break;
-                        case 4:
-                            System.out.println("4");
-                            break;
-                            case 5:
-                                System.out.println("5");
-                                break;
-        }
-
+        this.mainMenu.enableMenu();
     }
 
 
@@ -64,6 +54,29 @@ public class LEI_200221030_200221070 {
         user1.addGenerateID("h");
         user1.addGenerateID("i");
         user1.addGenerateID("j");
+    }
+    
+    
+    
+    
+    public void closeApplication(){
+        System.out.println("+---------------------------------------+");
+        System.out.println("                                         ");
+        System.out.println("           Adeus, volte sempre           ");
+        System.out.println("                                         ");
+        System.out.println("+---------------------------------------+");
+        System.exit(0);
+    }
+
+    public void changeMenu(int newMenu){
+        switch (newMenu){
+            case 0:
+                this.mainMenu.enableMenu();
+                break;
+            case 1:
+                this.presencasMenu.enableMenu();
+                break;
+        }
     }
     
 }

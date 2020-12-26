@@ -18,6 +18,10 @@ public class InputReader {
         reader = new Scanner(System.in);
     }
     
+    public void nextLine(){
+        this.reader.nextLine();
+    }
+    
     private void showFormattedQuestion(String question) {
         if(question == null) {
             question = "";
