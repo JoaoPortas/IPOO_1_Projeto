@@ -6,18 +6,29 @@ import java.util.Arrays;
  */
 
 /**
- *
+ * Class Database, esta classe é a representação da base de dados usado durante a execução do programa
  * @author Joao2
  */
-public class TestDB {
+public class Database {
     
-    private User[] userData = new User[1];
+    private User[] userData = null;
     
-    
-    public TestDB(){
-         
+    /**
+     * Contrutor para a classe Database, esta não requere parametros
+     */
+    public Database(){
+        if (this.userData == null){
+            userData = new User[1];
+        }else{
+            return;
+        }
     }
     
+    /**
+     * Este Método permite registar um novo utilizadar na base de dados
+     * @param userToRegister Objeto relativo ao novo utilizador a registar
+     * @return Eetorna um código de erro do tipo enum ErrorCode
+     */
     public ErrorCode registerUser(User userToRegister){
         boolean duplicateFlag = false;
         if (this.userData.length > 1){
@@ -40,7 +51,11 @@ public class TestDB {
         return ErrorCode.NoError;
     }
     
-    
+    /**
+     * Este método permite obter um utilizador da base de dados
+     * @param individualID Id de 9 digitos individual do utilizador 
+     * @return Retorna um Objeto do tipo User
+     */
     public User getUser(int individualID){
         for (User userBuffer : this.userData){
             if (userBuffer.getIndividualID() == individualID){
@@ -50,6 +65,12 @@ public class TestDB {
         return null;
     }
     
+    /**
+     * 
+     * Este método permite obter um utilizador da base de dados
+     * @param generatedID String com Id anonimo representando o utilizador 
+     * @return Retorna um Objeto do tipo User
+     */
     public User getUser(String generatedID){
         for (User userBuffer : this.userData){
             for (String idBuffer : userBuffer.getGeneraredIDs()){
@@ -61,7 +82,12 @@ public class TestDB {
         return null;
     }
     
-    
+    /**
+     * Este metódo permite atualizar o utilizador
+     * @param userObject objecto do utilizador
+     * @param id id de 9 digitos do utilizador
+     * @return Eetorna um código de erro do tipo enum ErrorCode
+     */
     public ErrorCode updateUser(User userObject,int id){
         if (getUserIndex(id) != -1){
             this.userData[getUserIndex(id)] = userObject;
@@ -72,7 +98,11 @@ public class TestDB {
         }
     }
     
-    
+    /**
+     * Obtem um index no array da base de dados
+     * @param id id de 9 digitos do utilizador
+     * @return Retorna o index do utilizador
+     */
     private int getUserIndex(int individualID){
         int c = 0;
         for (User userBuffer : this.userData){
@@ -85,6 +115,15 @@ public class TestDB {
         return -1;
     }
     
+    public ErrorCode removeUserFromDB(int individualId){
+        //TODO
+        return ErrorCode.NoError;
+    }
+    
+    public ErrorCode removeUserFromDB(String generatedId){
+        //TODO
+        return ErrorCode.NoError;
+    }
     
     public int getNumberOfRegistredUsers(){
         return this.userData.length - 1;
