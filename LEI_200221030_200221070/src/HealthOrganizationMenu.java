@@ -2,14 +2,14 @@
  * Class MainMenu representa o menu principal
  * @author João Gouveia e João Portas
  */
-public class MainMenu {
+public class HealthOrganizationMenu {
     
     InputReader inputReader;
     boolean isActive = false;
     LEI_200221030_200221070 mainActivity;
     int currentlyAvailableOptions;
     
-    public MainMenu(LEI_200221030_200221070 mainActivity){
+    public HealthOrganizationMenu(LEI_200221030_200221070 mainActivity){
         if (this.isActive == false){
             if (this.mainActivity == null){
                 this.mainActivity = mainActivity;
@@ -55,29 +55,22 @@ public class MainMenu {
 
     private void menuHandler(){
         String[] options = {
-            "Registo de presenças",
-            "Área de utilizador",
-            "Área de Autoridade de Saúde",
-            "Área de Administrador",
+            "Enviar lista de alunos infetados hoje",
+            "Ver Estatisticas",
             "Sair"
         };
-        printMenu("Bem Vindo ao Sistema de rastreio",options);
+        printMenu("Bem Vindo ao Sistema de rastreio,Área de Adminitração de Saúde",options);
+        this.currentlyAvailableOptions = options.length;
         int response = getResponse();
-        if (response > 0 && response < 5){
-            this.mainActivity.changeMenu(response);
-        }
-        else if (response == 5){
+        
+        if (response == this.currentlyAvailableOptions){
             disableMenu();
-        }else{
-            System.out.println("Opção Inválida, tente novamente (prima 'enter' para continuar)");
-            this.inputReader.nextLine();
-            menuHandler();
+            this.mainActivity.changeMenu(0);
         }
     }
 
     private void disableMenu(){
         this.isActive = false;
-        this.mainActivity.closeApplication();
     }
 
 
