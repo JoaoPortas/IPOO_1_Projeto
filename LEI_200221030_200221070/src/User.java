@@ -131,8 +131,22 @@ public class User {
     }
     
     public void deleteOldIDs() {
+        LocalDate nowDate = LocalDate.now();
+        System.out.println(nowDate);
+        nowDate = nowDate.minusDays(1);
+        System.out.println(nowDate);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/uuuu");
+        //LocalDate localDate;
+
         for (int i = 0; i < this.generatedIDs.length; i++) {
-            System.out.println(this.generatedIDs[i]);
+
+            if (nowDate.isBefore((LocalDate.parse(this.generatedIDs[i].substring(39, 49), formatter)).plusDays(27))) {
+                System.out.println("localDate");
+            }
+            //localDate = LocalDate.parse(this.generatedIDs[i].substring(39, 49), formatter);
+            //LocalDate dt = formatter.parseLocalDate(yourinput);
+
+            //System.out.println(localDate);
         }
     }
 }
