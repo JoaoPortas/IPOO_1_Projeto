@@ -12,5 +12,6 @@ public enum ErrorCode {
     UserNotFound,
     UserAlreadyRegistred,
     NoError,
-    UnknownErrorUpdatingData
+    UnknownErrorUpdatingData,
+    UnknownErrorRemovingUser
 }

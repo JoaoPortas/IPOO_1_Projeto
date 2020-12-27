@@ -115,16 +115,58 @@ public class Database {
         return -1;
     }
     
+    /**
+     * Remove um utilizador da base de dados
+     * @param id id de 9 digitos do utilizador
+     * @return Eetorna um código de erro do tipo enum ErrorCode
+     */
     public ErrorCode removeUserFromDB(int individualId){
-        //TODO
+        int index = getUserIndex(individualId);
+        if (index != -1){
+            this.userData[index] = null;
+            for (int a = index + 1; a < this.userData.length;a++){
+                if (this.userData[a] == null) continue;
+                this.userData[a -1] = this.userData[a];
+            }
+            
+            User[] buffer = Arrays.copyOf(this.userData,this.userData.length - 1);
+            this.userData = Arrays.copyOf(buffer, buffer.length);
+        }
+        else{
+            return ErrorCode.UserNotFound;
+        }
         return ErrorCode.NoError;
     }
     
+    /**
+     * Remove um utilizador da base de dados
+     * @param generatedID String com Id anonimo representando o utilizador 
+     * @return Eetorna um código de erro do tipo enum ErrorCode
+     */
     public ErrorCode removeUserFromDB(String generatedId){
-        //TODO
+        
+        User user = this.getUser(generatedId);
+        int index = getUserIndex(user.getIndividualID());
+        if (index != -1){
+            this.userData[index] = null;
+            for (int a = index + 1; a < this.userData.length;a++){
+                if (this.userData[a] == null) continue;
+                this.userData[a -1] = this.userData[a];
+            }
+            
+            User[] buffer = Arrays.copyOf(this.userData,this.userData.length - 1);
+            this.userData = Arrays.copyOf(buffer, buffer.length);
+        }
+        else{
+            return ErrorCode.UserNotFound;
+        }
         return ErrorCode.NoError;
     }
     
+    /**
+     * Obtem o numero de utilizadores na base de dados
+     * @return Retorna o numero de utilizadores na base de dados
+     */
     public int getNumberOfRegistredUsers(){
         return this.userData.length - 1;
     }

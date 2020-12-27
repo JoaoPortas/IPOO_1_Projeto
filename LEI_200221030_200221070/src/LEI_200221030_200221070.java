@@ -132,6 +132,26 @@ public class LEI_200221030_200221070 {
         
         System.out.println("------------Numero de utilizadorres na Bd-------------");
         System.out.println("Nº -> " + database.getNumberOfRegistredUsers());
+        
+        
+        System.out.println("------------Remover User 200221030-------------");
+        result = database.removeUserFromDB(200221030);
+        
+        switch (result){
+            case NoError:
+                status = "Utilizador Apagado Com Sucesso";
+                break;
+            case UserAlreadyRegistred:
+                status = "Erro, Utilizador já se encontra registado";
+                break;
+            case UnknownErrorRemovingUser:
+                 status = "Erro desconhecido ao remover user";
+                 break;
+        }
+        System.out.println("Operation return -> " + status);
+        System.out.println("------------Numero de utilizadorres na Bd-------------");
+        System.out.println("Nº -> " + database.getNumberOfRegistredUsers());
+        
     }
 
 
