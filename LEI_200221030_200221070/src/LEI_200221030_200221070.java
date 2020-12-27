@@ -17,6 +17,7 @@ public class LEI_200221030_200221070 {
     
     MainMenu mainMenu;
     PresencasMenu presencasMenu;
+    UserMenu userMenu;
     
     public static void main(String[] args) {
 
@@ -24,7 +25,7 @@ public class LEI_200221030_200221070 {
         LEI_200221030_200221070 mainClass = new LEI_200221030_200221070();
         mainClass.mainMenu = new MainMenu(mainClass);
         mainClass.presencasMenu = new PresencasMenu(mainClass);
-        
+        mainClass.userMenu = new UserMenu(mainClass);
         
         InputReader reader = new InputReader();
         int what = reader.getIntegerNumber("Quem");
@@ -75,6 +76,9 @@ public class LEI_200221030_200221070 {
                 break;
             case 1:
                 this.presencasMenu.enableMenu();
+                break;
+            case 2:
+                this.userMenu.enableMenu();
                 break;
         }
     }

@@ -63,27 +63,15 @@ public class MainMenu {
         };
         printMenu("Bem Vindo ao Sistema de rastreio",options);
         int response = getResponse();
-        switch(response){
-            case 1:
-                this.mainActivity.changeMenu(1);
-                break;
-            case 2:
-                this.mainActivity.changeMenu(1);
-                break;
-            case 3:
-                this.mainActivity.changeMenu(1);
-                break;
-            case 4:
-                this.mainActivity.changeMenu(1);
-                break;
-            case 5:
-                disableMenu();
-                break;
-            default:
-                System.out.println("Opção Inválida, tente novamente (prima 'enter' para continuar)");
-                this.inputReader.nextLine();
-                menuHandler();
-                break;
+        if (response > 0 && response < 5){
+            this.mainActivity.changeMenu(response);
+        }
+        else if (response == 5){
+            disableMenu();
+        }else{
+            System.out.println("Opção Inválida, tente novamente (prima 'enter' para continuar)");
+            this.inputReader.nextLine();
+            menuHandler();
         }
     }
 
