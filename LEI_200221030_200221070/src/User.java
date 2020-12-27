@@ -130,4 +130,9 @@ public class User {
         this.generatedIDs = Arrays.copyOf(newGeneratedIDs, newGeneratedIDs.length);
     }
     
+    public void deleteOldIDs() {
+        for (int i = 0; i < this.generatedIDs.length; i++) {
+            System.out.println(this.generatedIDs[i]);
+        }
+    }
 }
