@@ -77,7 +77,7 @@ public class UserMenu {
             "Estado: Em Continuo desde 99/99/9999",
         };
         String[] options = {
-            "Verifiacr instruções da Entidade de saude",
+            "Verifiacar instruções da Entiade de saude",
             "Decalrar-se como infectado",
             "Entrar em isolamento profilático",
             "Terminar Isolamento",

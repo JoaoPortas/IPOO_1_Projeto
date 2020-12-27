@@ -4,10 +4,10 @@
  */
 public class AdministrationMenu {
     
-    InputReader inputReader;
-    boolean isActive = false;
-    LEI_200221030_200221070 mainActivity;
-    int currentlyAvailableOptions;
+    private InputReader inputReader;
+    private boolean isActive = false;
+    private LEI_200221030_200221070 mainActivity;
+    private int currentlyAvailableOptions;
     
     public AdministrationMenu(LEI_200221030_200221070 mainActivity){
         if (this.isActive == false){

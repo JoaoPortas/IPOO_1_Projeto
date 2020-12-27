@@ -2,10 +2,10 @@
 
 public class PresencasMenu {
     
-    InputReader inputReader;
-    boolean isActive = false;
-    LEI_200221030_200221070 mainActivity;
-    int currentlyAvailableOptions;
+    private InputReader inputReader;
+    private boolean isActive = false;
+    private LEI_200221030_200221070 mainActivity;
+    private int currentlyAvailableOptions;
 
     String userId = null;
 
@@ -108,7 +108,7 @@ public class PresencasMenu {
         return true;
     }
 
-    public void terminarAula(){
+    private void terminarAula(){
         String[] opcoes = {};
         printMenu("Aula terminada com sucesso", opcoes);
         disableMenu();
