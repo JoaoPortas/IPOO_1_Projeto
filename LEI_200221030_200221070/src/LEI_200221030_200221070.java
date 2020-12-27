@@ -50,7 +50,7 @@ public class LEI_200221030_200221070 {
         
         System.out.println("-----------Creating--------------");
         System.out.println("Registering User: " + 200221030);
-        TestDB database = new TestDB();
+        Database database = new Database();
         ErrorCode result = database.registerUser(new User(200221030,UserState.CONTINUOUS));
         switch (result){
             case NoError:
