@@ -61,6 +61,7 @@ public class PresencasMenu {
         User[] buffer = Arrays.copyOf(this.usersInClass,this.usersInClass.length + 1);
         buffer[this.usersInClass.length - 1] = target;
         this.usersInClass = Arrays.copyOf(buffer, buffer.length);
+        
     }
 
     public boolean isActive(){
@@ -226,6 +227,7 @@ public class PresencasMenu {
     
     private void terminarAula(){
         for (User buffer : this.usersInClass){
+            if (buffer == null) continue;
             buffer.addGenerateID();
             this.database.updateUser(buffer, buffer.getIndividualID());
         }
