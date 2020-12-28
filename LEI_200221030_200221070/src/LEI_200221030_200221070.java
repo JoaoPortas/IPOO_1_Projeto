@@ -66,6 +66,7 @@ public class LEI_200221030_200221070 {
         user1.addGenerateID();
         user1.addGenerateID();
         user1.addGenerateID();
+        //System.out.println(user1.getGeneraredIDs());
         
         user1.deleteOldIDs();
     }    
