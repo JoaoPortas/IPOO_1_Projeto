@@ -31,6 +31,7 @@ public class User {
             this.individualID = individualID;
             this.status = status;
             this.generatedIDs = new String[0];
+            this.recivedIDs =  new String[0];
         }
     }
 

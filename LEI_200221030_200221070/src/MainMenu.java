@@ -94,6 +94,11 @@ public class MainMenu {
                     System.out.println("'"  + stringBuffer + "'");
                 }
                 System.out.println("}");
+                System.out.println("RecivedIDs: {");
+                for (String stringBuffer : buffer.getRecivedIDs()){
+                    System.out.println("'"  + stringBuffer + "'");
+                }
+                System.out.println("}");
                 System.out.println("-------------------------------------------------");
             }
             System.out.println("prima 'enter' para continuar");

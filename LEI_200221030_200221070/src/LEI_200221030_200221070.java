@@ -77,8 +77,6 @@ public class LEI_200221030_200221070 {
         System.out.println("           Adeus, volte sempre           ");
         System.out.println("                                         ");
         System.out.println("+---------------------------------------+");
-        
-        System.out.println("Database Size: " + this.basededados.getNumberOfRegistredUsers());
         System.exit(0);
     }
 
