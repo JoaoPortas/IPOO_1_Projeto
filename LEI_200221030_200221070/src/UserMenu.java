@@ -107,10 +107,22 @@ public class UserMenu {
         };
         printMenu(titles,options);
         int response = getResponse();
-        
-        if (response == 6){
-            disableMenu();
-            this.mainActivity.changeMenu(0);
+        switch (response){
+            case 2:
+                this.userObject.setStatus(UserState.INFECTED);
+                this.database.updateUser(userObject, userObject.getIndividualID());
+                
+                options = new String[]{};
+                titles = new String[]{"Defenido como infectado"};
+                printMenu(titles,options);
+                System.out.println("Prima 'enter' para continuar");
+                this.inputReader.nextLine();
+                menuHandler();
+                break;
+            case 6:
+                disableMenu();
+                this.mainActivity.changeMenu(0);
+                break;
         }
     }
 
