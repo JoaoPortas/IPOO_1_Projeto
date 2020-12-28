@@ -32,7 +32,7 @@ public class LEI_200221030_200221070 {
         mainClass.basededados  = new Database();
         mainClass.mainMenu = new MainMenu(mainClass);
         mainClass.presencasMenu = new PresencasMenu(mainClass,mainClass.basededados);
-        mainClass.userMenu = new UserMenu(mainClass);
+        mainClass.userMenu = new UserMenu(mainClass,mainClass.basededados);
         mainClass.healthOrganizationMenu = new HealthOrganizationMenu(mainClass);
         mainClass.administrationMenu = new AdministrationMenu(mainClass);
         

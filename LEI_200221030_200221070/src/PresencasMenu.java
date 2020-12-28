@@ -190,6 +190,12 @@ public class PresencasMenu {
         return true;
     }
 
+    private void sendIds(){
+        
+    }
+    
+    
+    
     private void terminarAula(){
         String[] opcoes = {};
         printMenu("Aula terminada com sucesso", opcoes);

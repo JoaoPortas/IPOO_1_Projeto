@@ -6,23 +6,32 @@ public class UserMenu {
     private boolean isActive = false;
     private LEI_200221030_200221070 mainActivity;
     private int currentlyAvailableOptions;
+    private User userObject;
+    private Database database;
+    int userId = -1;
 
-    String userId = null;
-
-    public UserMenu(LEI_200221030_200221070 mainActivity){
+    public UserMenu(LEI_200221030_200221070 mainActivity,Database database){
         if (this.isActive == false){
             if (this.mainActivity == null){
                 this.mainActivity = mainActivity;
                 this.inputReader = new InputReader();
+                this.database = database;
             }
         }
     }
 
     public void enableMenu(){
         this.isActive = true;
-        this.userId = inputReader.getText("Número de Utilizador");
-        while(this.userId.length() != 9){
-            this.userId = inputReader.getText("Número de Utilizador inválido, tente novamente");
+        this.userId = inputReader.getIntegerNumber("Número de Utilizador");
+        while(String.valueOf(this.userId).length() != 9){
+            this.userId = inputReader.getIntegerNumber("Número de Utilizador inválido, tente novamente");
+        }
+        this.userObject = database.getUser(this.userId);
+        if (this.userObject == null){
+            this.userObject = new User(this.userId,UserState.CONTINUOUS);
+            database.registerUser(this.userObject);
+        }else{
+            
         }
         this.menuHandler();
     }
@@ -71,10 +80,22 @@ public class UserMenu {
     }
 
     private void menuHandler(){
+        String status = "";
+        switch (this.userObject.getStatus()){
+            case CONTINUOUS:
+                status = "Em Continuo";
+                break;
+            case INFECTED:
+                status = "Em Infectado";
+                break;
+            case ISOLATION:
+                 status = "Em Isolamento";
+                 break;
+        }
         String[] titles = {
             "Sistema de rastreio em sala de aula, Área do Utilizador",
-            "Utilizador: " + this.userId,
-            "Estado: Em Continuo desde 99/99/9999",
+            "Utilizador: " + this.userObject.getIndividualID(),
+            "Estado: " + status + " desde 99/99/9999",
         };
         String[] options = {
             "Verifiacar instruções da Entiade de saude",
@@ -95,7 +116,7 @@ public class UserMenu {
 
     private void disableMenu(){
         this.isActive = false;
-        this.userId = null;
+        this.userId = -1;
     }
 
     private int getResponse(){
