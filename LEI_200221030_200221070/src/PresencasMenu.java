@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 public class PresencasMenu {
     
+    
     private InputReader inputReader;
     private boolean isActive = false;
     private LEI_200221030_200221070 mainActivity;
