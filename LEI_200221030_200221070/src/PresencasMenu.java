@@ -103,6 +103,31 @@ public class PresencasMenu {
                 disableMenu();
                 this.mainActivity.changeMenu(0);
                 break;
+            case 4:
+                String status = "";
+                System.out.println("----------------Class Print:-------------------");
+                for (User buffer : this.usersInClass){
+                    if (buffer == null) continue;
+                    System.out.println("Id: " + buffer.getIndividualID());
+
+                    switch (buffer.getStatus()){
+                        case CONTINUOUS:
+                            status = "Em Continuo";
+                            break;
+                        case INFECTED:
+                            status = "Em Infectado";
+                            break;
+                        case ISOLATION:
+                             status = "Em Isolamento";
+                             break;
+                    }
+                    System.out.println("Estado: " + status);
+                    System.out.println("-------------------------------------------------");
+                }
+                System.out.println("prima 'enter' para continuar");
+                this.inputReader.nextLine();
+                menuHandler();
+                break;
             default:
                 System.out.println("Opção Inválida, tente novamente (prima 'enter' para continuar)");
                 this.inputReader.nextLine();
@@ -114,6 +139,7 @@ public class PresencasMenu {
     private void disableMenu(){
         this.isActive = false;
         this.userId = -1;
+        this.usersInClass = new User[1];
     }
 
     
