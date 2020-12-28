@@ -8,12 +8,14 @@ public class MainMenu {
     private boolean isActive = false;
     private LEI_200221030_200221070 mainActivity;
     private int currentlyAvailableOptions;
+    private Database database;
     
-    public MainMenu(LEI_200221030_200221070 mainActivity){
+    public MainMenu(LEI_200221030_200221070 mainActivity,Database database){
         if (this.isActive == false){
             if (this.mainActivity == null){
                 this.mainActivity = mainActivity;
                 this.inputReader = new InputReader();
+                this.database = database;
             }
         }
     }
@@ -68,7 +70,32 @@ public class MainMenu {
         }
         else if (response == 5){
             disableMenu();
-        }else{
+        }else if (response == 6){
+            String status = "";
+            System.out.println("----------------Database Print:-------------------");
+            for (User buffer : database.getAllUsers()){
+                if (buffer == null) continue;
+                System.out.println("Id: " + buffer.getIndividualID());
+                
+                switch (buffer.getStatus()){
+                    case CONTINUOUS:
+                        status = "Em Continuo";
+                        break;
+                    case INFECTED:
+                        status = "Em Infectado";
+                        break;
+                    case ISOLATION:
+                         status = "Em Isolamento";
+                         break;
+                }
+                System.out.println("Estado: " + status);
+                System.out.println("-------------------------------------------------");
+            }
+            System.out.println("prima 'enter' para continuar");
+            this.inputReader.nextLine();
+            menuHandler();
+        }
+        else{
             System.out.println("Opção Inválida, tente novamente (prima 'enter' para continuar)");
             this.inputReader.nextLine();
             menuHandler();

@@ -66,6 +66,11 @@ public class Database {
         return null;
     }
     
+    
+    public User[] getAllUsers(){
+        return this.userData;
+    }
+    
     /**
      * 
      * Este método permite obter um utilizador da base de dados
