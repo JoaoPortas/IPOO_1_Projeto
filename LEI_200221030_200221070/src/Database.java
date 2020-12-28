@@ -117,7 +117,7 @@ public class Database {
     
     /**
      * Remove um utilizador da base de dados
-     * @param id id de 9 digitos do utilizador
+     * @param individualId id de 9 digitos do utilizador
      * @return Eetorna um código de erro do tipo enum ErrorCode
      */
     public ErrorCode removeUserFromDB(int individualId){
@@ -140,7 +140,7 @@ public class Database {
     
     /**
      * Remove um utilizador da base de dados
-     * @param generatedID String com Id anonimo representando o utilizador 
+     * @param generatedId String com Id anonimo representando o utilizador 
      * @return Eetorna um código de erro do tipo enum ErrorCode
      */
     public ErrorCode removeUserFromDB(String generatedId){
