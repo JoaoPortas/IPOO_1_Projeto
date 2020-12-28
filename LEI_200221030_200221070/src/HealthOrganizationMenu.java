@@ -8,12 +8,15 @@ public class HealthOrganizationMenu {
     private boolean isActive = false;
     private LEI_200221030_200221070 mainActivity;
     private int currentlyAvailableOptions;
+    private Database database;
     
-    public HealthOrganizationMenu(LEI_200221030_200221070 mainActivity){
+    
+    public HealthOrganizationMenu(LEI_200221030_200221070 mainActivity,Database database){
         if (this.isActive == false){
             if (this.mainActivity == null){
                 this.mainActivity = mainActivity;
                 this.inputReader = new InputReader();
+                this.database = database;
             }
         }
     }
