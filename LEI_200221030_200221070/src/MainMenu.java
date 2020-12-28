@@ -89,6 +89,11 @@ public class MainMenu {
                          break;
                 }
                 System.out.println("Estado: " + status);
+                System.out.println("GeneratedIds: {");
+                for (String stringBuffer : buffer.getGeneraredIDs()){
+                    System.out.println("'"  + stringBuffer + "'");
+                }
+                System.out.println("}");
                 System.out.println("-------------------------------------------------");
             }
             System.out.println("prima 'enter' para continuar");
