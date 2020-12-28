@@ -13,5 +13,6 @@ public enum ErrorCode {
     UserAlreadyRegistred,
     NoError,
     UnknownErrorUpdatingData,
-    UnknownErrorRemovingUser
+    UnknownErrorRemovingUser,
+    UnknownErrorRegisteringUser
 }

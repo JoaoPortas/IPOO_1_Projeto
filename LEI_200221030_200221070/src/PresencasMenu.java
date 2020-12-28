@@ -1,4 +1,7 @@
 
+import java.util.Arrays;
+
+
 
 public class PresencasMenu {
     
@@ -6,27 +9,57 @@ public class PresencasMenu {
     private boolean isActive = false;
     private LEI_200221030_200221070 mainActivity;
     private int currentlyAvailableOptions;
+    private Database database;
+    private User[] usersInClass;
+    
+    int userId = -1;
 
-    String userId = null;
-
-    public PresencasMenu(LEI_200221030_200221070 mainActivity){
+    public PresencasMenu(LEI_200221030_200221070 mainActivity,Database basededados){
         if (this.isActive == false){
             if (this.mainActivity == null){
                 this.mainActivity = mainActivity;
                 this.inputReader = new InputReader();
+                this.database = basededados;
+                this.usersInClass = new User[1];
             }
         }
     }
 
     public void enableMenu(){
         this.isActive = true;
-        this.userId = inputReader.getText("Número de Utilizador");
-        while(this.userId.length() != 9){
-            this.userId = inputReader.getText("Número de Utilizador inválido, tente novamente");
+        this.userId = inputReader.getIntegerNumber("Número de Utilizador");
+        while(String.valueOf(this.userId).length() != 9){
+            this.userId = inputReader.getIntegerNumber("Número de Utilizador inválido, tente novamente");
+        }
+        User gotUser = this.database.getUser(this.userId);
+        
+        if (gotUser == null){
+            User createdUser = new User(this.userId,UserState.CONTINUOUS);
+            ErrorCode status = this.database.registerUser(createdUser);
+            switch (status){
+                case UnknownErrorRegisteringUser:
+                    System.out.println("Erro ao confirmar número de utilizador, tente novamete");
+                    disableMenu();
+                    mainActivity.changeMenu(0);
+                    break;
+                case NoError:
+                    addUserToClassArray(createdUser);
+                    break;
+            }
+        }
+        else{
+            addUserToClassArray(gotUser);
         }
         this.menuHandler();
     }
 
+    
+    private void addUserToClassArray(User target){
+        
+        User[] buffer = Arrays.copyOf(this.usersInClass,this.usersInClass.length + 1);
+        buffer[this.usersInClass.length - 1] = target;
+        this.usersInClass = Arrays.copyOf(buffer, buffer.length);
+    }
 
     public boolean isActive(){
         return this.isActive;
@@ -80,9 +113,20 @@ public class PresencasMenu {
 
     private void disableMenu(){
         this.isActive = false;
-        this.userId = null;
+        this.userId = -1;
     }
 
+    
+    private boolean userAlreadyInClass(int individualID){
+        for (User buffer : this.usersInClass){
+            if (buffer == null) continue;
+            if (buffer.getIndividualID() == individualID){
+                return true;
+            }
+        }
+        return false;
+    }
+    
     private boolean registerPresence(){
         String[] opcoes = {"Cancelar"};
         printMenu("Insira o nº do Aluno ou uma das seguintes opções", opcoes);
@@ -97,10 +141,48 @@ public class PresencasMenu {
                     this.inputReader.nextLine();
                     menuHandler();
                 }else{
-                    opcoes = new String[]{};
-                    printMenu("Utilizador Registado Com Sucesso",opcoes);
-                    System.out.println("Prima 'enter' para continuar");
-                    this.inputReader.nextLine();
+                    
+                    if (!userAlreadyInClass(response)){
+                        ErrorCode status;
+                        User tempBuffer = this.database.getUser(response);
+                        if (tempBuffer == null){
+                            //No User Registred
+                            User createdUser = new User(response,UserState.CONTINUOUS);
+                            //GerarId
+                            status = database.registerUser(createdUser);
+                            switch(status){
+                                case NoError:
+                                    addUserToClassArray(createdUser);
+                                    opcoes = new String[]{};
+                                    printMenu("Utilizador Registado Com Sucesso",opcoes);
+                                    System.out.println("Prima 'enter' para continuar");
+                                    this.inputReader.nextLine();
+                                    menuHandler();
+                                    break;
+                                case UserAlreadyRegistred:
+                                    System.out.println("WTF");
+                            }
+                        }else{
+                            //Geberate Id
+                            status = database.updateUser(tempBuffer, response);
+                            switch(status){
+                                case NoError:
+                                    addUserToClassArray(tempBuffer);
+                                    opcoes = new String[]{};
+                                    printMenu("Utilizador Registado Com Sucesso",opcoes);
+                                    System.out.println("Prima 'enter' para continuar");
+                                    this.inputReader.nextLine();
+                                    menuHandler();
+                                    break;
+                            }
+                        }
+                    }else{
+                        opcoes = new String[]{};
+                        printMenu("Utilizador já se encontra registado na aula",opcoes);
+                        System.out.println("Prima 'enter' para continuar");
+                        this.inputReader.nextLine();
+                        menuHandler();
+                    }
                 }
                 break;
                 

@@ -58,6 +58,7 @@ public class Database {
      */
     public User getUser(int individualID){
         for (User userBuffer : this.userData){
+            if (userBuffer == null) continue;
             if (userBuffer.getIndividualID() == individualID){
                 return userBuffer;
             }
@@ -73,6 +74,7 @@ public class Database {
      */
     public User getUser(String generatedID){
         for (User userBuffer : this.userData){
+            if (userBuffer == null) continue;
             for (String idBuffer : userBuffer.getGeneraredIDs()){
                 if (idBuffer.equals(generatedID)){
                     return userBuffer;

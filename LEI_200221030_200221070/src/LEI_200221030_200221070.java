@@ -23,14 +23,15 @@ public class LEI_200221030_200221070 {
     UserMenu userMenu;
     HealthOrganizationMenu healthOrganizationMenu;
     AdministrationMenu administrationMenu;
-    
+    Database basededados;
     
     public static void main(String[] args) {
 
         
         LEI_200221030_200221070 mainClass = new LEI_200221030_200221070();
+        mainClass.basededados  = new Database();
         mainClass.mainMenu = new MainMenu(mainClass);
-        mainClass.presencasMenu = new PresencasMenu(mainClass);
+        mainClass.presencasMenu = new PresencasMenu(mainClass,mainClass.basededados);
         mainClass.userMenu = new UserMenu(mainClass);
         mainClass.healthOrganizationMenu = new HealthOrganizationMenu(mainClass);
         mainClass.administrationMenu = new AdministrationMenu(mainClass);
@@ -46,112 +47,8 @@ public class LEI_200221030_200221070 {
     }
 
     public void joao(){
-        String status = "";
-        
-        System.out.println("-----------Creating--------------");
-        System.out.println("Registering User: " + 200221030);
-        Database database = new Database();
-        ErrorCode result = database.registerUser(new User(200221030,UserState.CONTINUOUS));
-        switch (result){
-            case NoError:
-                status = "Utilizador Registado Com Sucesso";
-                break;
-            case UserAlreadyRegistred:
-                status = "Erro, Utilizador já se encontra registado";
-                break;
-        }
-        System.out.println("Operation return -> " + status);
-        System.out.println("Getting User 200221030");
-        User test = database.getUser(200221030);
-        System.out.println("Result: ");
-        System.out.println(test.getIndividualID());
-        
-        System.out.println("-----------Updating--------------");
-        System.out.println("New Id -> " + 200221031);
-        test.setIndividualID(200221031);
-        database.updateUser(test,200221030);
-        
-        switch (result){
-            case NoError:
-                status = "Utilizador Atualizado Com Sucesso";
-                break;
-            case UnknownErrorUpdatingData:
-                status = "Erro desconhecido ao atualizar o utilizdor";
-                break;
-            case UserNotFound:
-                status = "Erro ao atualizar o utilizdor, não encontrado";
-                break;
-        }
-        
-        System.out.println("Operation return -> " + status);
-        
-        System.out.println("-----------Obter com novo id--------------");
-        User teste2 = database.getUser(200221031);
-        System.out.println("Result: ");
-        System.out.println(teste2.getIndividualID());
-        
-        
-        System.out.println("------------Numero de utilizadorres na Bd-------------");
-        System.out.println("Nº -> " + database.getNumberOfRegistredUsers());
-        System.out.println("-----------Criar com id antigo--------------");
-        System.out.println("Registering User: " + 200221030);
-        result = database.registerUser(new User(200221030,UserState.CONTINUOUS));
-        switch (result){
-            case NoError:
-                status = "Utilizador Registado Com Sucesso";
-                break;
-            case UserAlreadyRegistred:
-                status = "Erro, Utilizador já se encontra registado";
-                break;
-        }
-        System.out.println("Operation return -> " + status);
-        System.out.println("Getting User 200221030");
-        test = database.getUser(200221030);
-        System.out.println("Result: ");
-        System.out.println(test.getIndividualID());
-        
-        
-        System.out.println("------------Numero de utilizadorres na Bd-------------");
-        System.out.println("Nº -> " + database.getNumberOfRegistredUsers());
-        System.out.println("-----------Criar com id novo--------------");
-        System.out.println("Registering User: " + 200221031);
-        result = database.registerUser(new User(200221031,UserState.CONTINUOUS));
-        switch (result){
-            case NoError:
-                status = "Utilizador Registado Com Sucesso";
-                break;
-            case UserAlreadyRegistred:
-                status = "Erro, Utilizador já se encontra registado";
-                break;
-        }
-        System.out.println("Operation return -> " + status);
-        System.out.println("Getting User 200221030");
-        test = database.getUser(200221030);
-        System.out.println("Result: ");
-        System.out.println(test.getIndividualID());
-        
-        System.out.println("------------Numero de utilizadorres na Bd-------------");
-        System.out.println("Nº -> " + database.getNumberOfRegistredUsers());
-        
-        
-        System.out.println("------------Remover User 200221030-------------");
-        result = database.removeUserFromDB(200221030);
-        
-        switch (result){
-            case NoError:
-                status = "Utilizador Apagado Com Sucesso";
-                break;
-            case UserAlreadyRegistred:
-                status = "Erro, Utilizador já se encontra registado";
-                break;
-            case UnknownErrorRemovingUser:
-                 status = "Erro desconhecido ao remover user";
-                 break;
-        }
-        System.out.println("Operation return -> " + status);
-        System.out.println("------------Numero de utilizadorres na Bd-------------");
-        System.out.println("Nº -> " + database.getNumberOfRegistredUsers());
-        
+        this.mainMenu.enableMenu();
+        System.out.println("Database Size: " + this.basededados.getNumberOfRegistredUsers());
     }
 
 
@@ -179,6 +76,8 @@ public class LEI_200221030_200221070 {
         System.out.println("           Adeus, volte sempre           ");
         System.out.println("                                         ");
         System.out.println("+---------------------------------------+");
+        
+        System.out.println("Database Size: " + this.basededados.getNumberOfRegistredUsers());
         System.exit(0);
     }
 
