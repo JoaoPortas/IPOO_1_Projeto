@@ -11,7 +11,6 @@ public class PresencasMenu {
     private int currentlyAvailableOptions;
     private Database database;
     private User[] usersInClass;
-    
     int userId = -1;
 
     public PresencasMenu(LEI_200221030_200221070 mainActivity,Database basededados){
@@ -36,6 +35,7 @@ public class PresencasMenu {
         if (gotUser == null){
             User createdUser = new User(this.userId,UserState.CONTINUOUS);
             ErrorCode status = this.database.registerUser(createdUser);
+            createdUser.addGenerateID();
             switch (status){
                 case UnknownErrorRegisteringUser:
                     System.out.println("Erro ao confirmar número de utilizador, tente novamete");
@@ -49,6 +49,8 @@ public class PresencasMenu {
         }
         else{
             addUserToClassArray(gotUser);
+            gotUser.addGenerateID();
+            this.database.updateUser(gotUser,gotUser.getIndividualID());
         }
         this.menuHandler();
     }
@@ -103,6 +105,31 @@ public class PresencasMenu {
                 disableMenu();
                 this.mainActivity.changeMenu(0);
                 break;
+            case 4:
+                String status = "";
+                System.out.println("----------------Class Print:-------------------");
+                for (User buffer : this.usersInClass){
+                    if (buffer == null) continue;
+                    System.out.println("Id: " + buffer.getIndividualID());
+
+                    switch (buffer.getStatus()){
+                        case CONTINUOUS:
+                            status = "Em Continuo";
+                            break;
+                        case INFECTED:
+                            status = "Em Infectado";
+                            break;
+                        case ISOLATION:
+                             status = "Em Isolamento";
+                             break;
+                    }
+                    System.out.println("Estado: " + status);
+                    System.out.println("-------------------------------------------------");
+                }
+                System.out.println("prima 'enter' para continuar");
+                this.inputReader.nextLine();
+                menuHandler();
+                break;
             default:
                 System.out.println("Opção Inválida, tente novamente (prima 'enter' para continuar)");
                 this.inputReader.nextLine();
@@ -114,6 +141,7 @@ public class PresencasMenu {
     private void disableMenu(){
         this.isActive = false;
         this.userId = -1;
+        this.usersInClass = new User[1];
     }
 
     
@@ -148,7 +176,7 @@ public class PresencasMenu {
                         if (tempBuffer == null){
                             //No User Registred
                             User createdUser = new User(response,UserState.CONTINUOUS);
-                            //GerarId
+                            createdUser.addGenerateID();
                             status = database.registerUser(createdUser);
                             switch(status){
                                 case NoError:
@@ -163,7 +191,7 @@ public class PresencasMenu {
                                     System.out.println("WTF");
                             }
                         }else{
-                            //Geberate Id
+                            tempBuffer.addGenerateID();
                             status = database.updateUser(tempBuffer, response);
                             switch(status){
                                 case NoError:
@@ -197,6 +225,11 @@ public class PresencasMenu {
     
     
     private void terminarAula(){
+        for (User buffer : this.usersInClass){
+            buffer.addGenerateID();
+            this.database.updateUser(buffer, buffer.getIndividualID());
+        }
+        
         String[] opcoes = {};
         printMenu("Aula terminada com sucesso", opcoes);
         disableMenu();
