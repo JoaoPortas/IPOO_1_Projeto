@@ -121,8 +121,14 @@ public class User {
      */
     public void addGenerateID() {
         LocalDate nowDate = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/uuuu");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu");
         String formatedDate = nowDate.format(formatter);
+
+        if (this.generatedIDs.length == 0) {
+            formatedDate = (nowDate.minusDays(20)).format(formatter);
+        } else {
+            formatedDate = nowDate.format(formatter);
+        }
 
         String[] newGeneratedIDs = Arrays.copyOf(this.generatedIDs, this.generatedIDs.length + 1);
 
@@ -130,24 +136,69 @@ public class User {
 
         this.generatedIDs = Arrays.copyOf(newGeneratedIDs, newGeneratedIDs.length);
     }
-    
-    public void deleteOldIDs() {
+
+    /**
+     * Elimina os IDs gerados com mais de 28 dias
+     */
+    public void deleteOldGeneretedIDs() {
         LocalDate nowDate = LocalDate.now();
-        //System.out.println(nowDate);
-        nowDate = nowDate.plusDays(27);
-        //System.out.println(nowDate);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/uuuu");
-        //LocalDate localDate;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu");
+
+        String[] newIDsList;
+        int lengthOfNewArray = 0;
 
         for (int i = 0; i < this.generatedIDs.length; i++) {
-
-            if (nowDate.isBefore((LocalDate.parse(this.generatedIDs[i].substring(39, 49), formatter)).plusDays(27)) || nowDate.isEqual((LocalDate.parse(this.generatedIDs[i].substring(39, 49), formatter)).plusDays(27))) {
-                System.out.println(this.generatedIDs[i].substring(39, 49));
+            if (nowDate.isAfter((LocalDate.parse(this.generatedIDs[i].substring(39, 49), formatter)).plusDays(28))) {
+                this.generatedIDs[i] = null;
+            }else {
+                lengthOfNewArray++;
             }
-            //localDate = LocalDate.parse(this.generatedIDs[i].substring(39, 49), formatter);
-            //LocalDate dt = formatter.parseLocalDate(yourinput);
-
-            //System.out.println(localDate);
         }
+
+        newIDsList = new String[lengthOfNewArray];
+
+        for (int i = 0, j = 0; i < this.generatedIDs.length; i++) {
+            if (this.generatedIDs[i] != null) {
+                newIDsList[j] = this.generatedIDs[i];
+                j++;
+            }
+        }
+
+        this.generatedIDs = Arrays.copyOf(newIDsList, newIDsList.length);
+    }
+
+    public void deleteOldRecivedIDs() {
+        LocalDate nowDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu");
+
+        String[] newIDsList;
+        int lengthOfNewArray = 0;
+
+        for (int i = 0; i < this.recivedIDs.length; i++) {
+            if (nowDate.isAfter((LocalDate.parse(this.recivedIDs[i].substring(39, 49), formatter)).plusDays(28))) {
+                this.recivedIDs[i] = null;
+            }else {
+                lengthOfNewArray++;
+            }
+        }
+
+        newIDsList = new String[lengthOfNewArray];
+
+        for (int i = 0, j = 0; i < this.recivedIDs.length; i++) {
+            if (this.recivedIDs[i] != null) {
+                newIDsList[j] = this.recivedIDs[i];
+                j++;
+            }
+        }
+
+        this.recivedIDs = Arrays.copyOf(newIDsList, newIDsList.length);
+    }
+
+    /**
+     * Elimina os IDs gerados e recebidos com mais de 28 dias
+     */
+    public void deleteOldIDs() {
+        deleteOldGeneretedIDs();
+        deleteOldRecivedIDs();
     }
 }
