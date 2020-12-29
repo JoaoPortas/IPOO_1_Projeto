@@ -68,6 +68,8 @@ public class HealthOrganizationMenu {
         int response = getResponse();
         switch (response){
             case 1:
+                //TODO enviar generatedIds para lá
+                //TODO atualizar estatisticas
                 break;
             case 2:
                 this.stats.showStatistics();
