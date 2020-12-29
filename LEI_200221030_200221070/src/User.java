@@ -240,7 +240,7 @@ public class User {
     
     
     
-    public void reciveID(String id){
+    public void reciveID(String id,int distance){
         LocalDate nowDate = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu");
         String formatedDate = nowDate.format(formatter);

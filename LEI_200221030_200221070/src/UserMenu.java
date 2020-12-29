@@ -98,7 +98,7 @@ public class UserMenu {
         String[] titles = {
             "Sistema de rastreio em sala de aula, Área do Utilizador",
             "Utilizador: " + this.userObject.getIndividualID(),
-            "Estado: " + status + " desde 99/99/9999",
+            "Estado: " + status + " desde " + this.userObject.getDateOfChangedStatus(),
         };
         String[] options = {
             "Verifiacar instruções da Entiade de saude",

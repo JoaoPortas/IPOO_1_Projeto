@@ -217,7 +217,7 @@ public class PresencasMenu {
             for (User secondBuffer : this.usersInClass){
                 if (secondBuffer == null) continue;
                 if (secondBuffer.getIndividualID() == buffer.getIndividualID()) continue;
-                secondBuffer.reciveID(buffer.getCurrentIDToCastString());
+                secondBuffer.reciveID(buffer.getCurrentIDToCastString(),0);
                 this.database.updateUser(secondBuffer,secondBuffer.getIndividualID());
             }
         }
