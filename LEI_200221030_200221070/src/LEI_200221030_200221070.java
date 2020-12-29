@@ -70,7 +70,7 @@ public class LEI_200221030_200221070 {
 
         user1.addGenerateID();
         
-        user1.deleteOldIDs();
+        System.out.println(user1.getDateOfChangedStatus());
     }    
     
     public void closeApplication(){

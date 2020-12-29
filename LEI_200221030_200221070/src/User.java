@@ -21,6 +21,7 @@ public class User {
     private String[] recivedIDs;
     private String currentIDToCast;
     private Cargos cargo;
+    private String dateOfChangedStatus;
     /**
      * 
      * @param individualID ID do individuo com 9 digitos (número de aluno ou número mecanográfico para docentes)
@@ -30,10 +31,19 @@ public class User {
         if (individualID == (int)individualID && status != null && String.valueOf(individualID).length() == 9) {
             this.individualID = individualID;
             this.status = status;
+            this.dateOfChangedStatus = (LocalDate.now()).format(DateTimeFormatter.ofPattern("dd/MM/uuuu"));
             this.generatedIDs = new String[0];
             this.recivedIDs =  new String[0];
             this.cargo = cargo;
         }
+    }
+
+    /**
+     * Obtem a data em que o estado do utilizador foi alterado (continuo, isolamento ou infetado)
+     * @return data da alteração do estado
+     */
+    public String getDateOfChangedStatus() {
+        return dateOfChangedStatus;
     }
 
     /**
@@ -82,6 +92,21 @@ public class User {
     }
 
     /**
+     * Define a data da troca do estado (continuo, isolamento ou infetado) para a data atual
+     */
+    public void setDateOfChangedStatus() {
+        this.dateOfChangedStatus = (LocalDate.now()).format(DateTimeFormatter.ofPattern("dd/MM/uuuu"));
+    }
+
+    /**
+     * Altera a data de troca de estado (continuo, isolamento ou infetado) para uma data introduzida
+     * @param dateOfChangedStatus data para a qual vai ser alterada
+     */
+    public void setDateOfChangedStatus(LocalDate dateOfChangedStatus) {
+        this.dateOfChangedStatus = (dateOfChangedStatus).format(DateTimeFormatter.ofPattern("dd/MM/uuuu"));
+    }
+
+    /**
      * 
      * @param individualID Recebe o número do inidividuo (numero de aluno ou mecanográfico para docentes) de 9 digitos
      */
@@ -110,12 +135,15 @@ public class User {
             switch (status) {
                 case CONTINUOUS:
                     setStatus(UserState.CONTINUOUS);
+                    setDateOfChangedStatus();
                     break;
                 case ISOLATION:
                     setStatus(UserState.ISOLATION);
+                    setDateOfChangedStatus();
                     break;
                 case INFECTED:
                     setStatus(UserState.INFECTED);
+                    setDateOfChangedStatus();
                     break;
             }
         }
