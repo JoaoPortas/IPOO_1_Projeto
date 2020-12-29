@@ -22,14 +22,19 @@ public class UserMenu {
         this.isActive = true;
         this.userId = inputReader.getIntegerNumber("Número de Utilizador");
         while(String.valueOf(this.userId).length() != 9){
-            this.userId = inputReader.getIntegerNumber("Número de Utilizador inválido, tente novamente");
+            this.userId = inputReader.getIntegerNumber("Número de Utilizador inválido ou não existente, tente novamente");
         }
+        
         this.userObject = database.getUser(this.userId);
-        if (this.userObject == null){
-            this.userObject = new User(this.userId,UserState.CONTINUOUS);
-            database.registerUser(this.userObject);
-        }else{
-            
+        
+        
+         while (this.userObject == null){
+            this.userId = inputReader.getIntegerNumber("Número de Utilizador inválido ou não existente, tente novamente(-1 para cancelar)");
+            if (this.userId == -1){
+                disableMenu();
+                this.mainActivity.changeMenu(0);
+            }
+            this.userObject = this.database.getUser(this.userId);
         }
         this.menuHandler();
     }

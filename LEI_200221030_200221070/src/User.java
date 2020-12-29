@@ -20,18 +20,19 @@ public class User {
     private String[] generatedIDs;
     private String[] recivedIDs;
     private String currentIDToCast;
-
+    private Cargos cargo;
     /**
      * 
      * @param individualID ID do individuo com 9 digitos (número de aluno ou número mecanográfico para docentes)
      * @param status Estado do individuo (continuo, isolamento ou infetado)
      */
-    public User(int individualID, UserState status) {
+    public User(int individualID, UserState status,Cargos cargo) {
         if (individualID == (int)individualID && status != null && String.valueOf(individualID).length() == 9) {
             this.individualID = individualID;
             this.status = status;
             this.generatedIDs = new String[0];
             this.recivedIDs =  new String[0];
+            this.cargo = cargo;
         }
     }
 
@@ -59,6 +60,11 @@ public class User {
         return generatedIDs;
     }
 
+    public Cargos getCargo(){
+        return this.cargo;
+    }
+    
+    
     /**
      * 
      * @return Retorna os IDs recebidos de outros utilizadores

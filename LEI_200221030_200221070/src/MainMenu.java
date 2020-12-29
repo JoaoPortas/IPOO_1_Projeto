@@ -89,6 +89,7 @@ public class MainMenu {
                          break;
                 }
                 System.out.println("Estado: " + status);
+                System.out.println("Tipo de Utilizador: " + buffer.getCargo());
                 System.out.println("GeneratedIds: {");
                 for (String stringBuffer : buffer.getGeneraredIDs()){
                     System.out.println("'"  + stringBuffer + "'");

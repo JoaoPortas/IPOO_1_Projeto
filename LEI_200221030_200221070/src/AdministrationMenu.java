@@ -68,13 +68,98 @@ public class AdministrationMenu {
         printMenu("Bem Vindo ao Sistema de rastreio, Área de Adminitração",options);
         this.currentlyAvailableOptions = options.length;
         int response = getResponse();
-        
+        switch (response){
+            case 1:
+                registerUser();
+                break;
+        }
         if (response == this.currentlyAvailableOptions){
             disableMenu();
             this.mainActivity.changeMenu(0);
         }
     }
 
+    
+    public void registerUser(){
+        User newUser;
+        String[] options = new String[]{"Cancelar"};
+        printMenu("Insira Nº de identificação do Utilizador",options);
+        
+        int response = getResponse();
+        switch (response){
+            case 1:
+                menuHandler();
+                break;
+            default:
+                while (String.valueOf(response).length() != 9){
+                    options = new String[]{"Cancelar"};
+                    printMenu("Nº de indentificação inválido, tente novamente",options);
+                    response = getResponse();
+                }
+                
+                int UID = response;
+                
+                options = new String[]{"Infectado","Isolamento","Continuo"};
+                printMenu("Insira o estado do utilizador",options);
+                response = getResponse();
+                UserState status = null;
+                switch(response){
+                    case 1:
+                        status = UserState.INFECTED;
+                        break;
+                    case 2:
+                        status = UserState.ISOLATION;
+                        break;
+                    case 3:
+                        status = UserState.CONTINUOUS;
+                        break;
+                }
+                
+                
+                options = new String[]{"Aluno","Professor"};
+                printMenu("Insira o estado do utilizador",options);
+                response = getResponse();
+                Cargos cargo = null;
+                switch(response){
+                    case 1:
+                        cargo = Cargos.Aluno;
+                        break;
+                    case 2:
+                        cargo = Cargos.Professor;
+                        break;
+                }
+                
+                newUser = new User(UID,status,cargo);
+                ErrorCode code = database.registerUser(newUser);
+                switch (code){
+                    case NoError:
+                        options = new String[]{};
+                        printMenu("Utilizador Registado Com Sucesso",options);
+                        System.out.println("Prima 'enter' para continuar");
+                        this.inputReader.nextLine();
+                        menuHandler();
+                        break;
+                    case UnknownErrorRegisteringUser:
+                        options = new String[]{};
+                        printMenu("Ocurreu um erro ao registar Utilizador, tente novamente",options);
+                        System.out.println("Prima 'enter' para continuar");
+                        this.inputReader.nextLine();
+                        menuHandler();
+                        break;
+                    case UserAlreadyRegistred:
+                        options = new String[]{};
+                        printMenu("Utilizador já se encontra registado, tente novamente",options);
+                        System.out.println("Prima 'enter' para continuar");
+                        this.inputReader.nextLine();
+                        menuHandler();
+                        break;
+                        
+                }
+        }
+        
+    }
+    
+    
     private void disableMenu(){
         this.isActive = false;
     }

@@ -47,6 +47,16 @@ public class LEI_200221030_200221070 {
     }
 
     public void joao(){
+        this.basededados.registerUser(new User(200221030,UserState.CONTINUOUS,Cargos.Aluno));
+        this.basededados.registerUser(new User(200221031,UserState.CONTINUOUS,Cargos.Aluno));
+        this.basededados.registerUser(new User(200221032,UserState.CONTINUOUS,Cargos.Aluno));
+        this.basededados.registerUser(new User(200221033,UserState.CONTINUOUS,Cargos.Aluno));
+        this.basededados.registerUser(new User(200221034,UserState.CONTINUOUS,Cargos.Aluno));
+        this.basededados.registerUser(new User(200221035,UserState.CONTINUOUS,Cargos.Aluno));
+        this.basededados.registerUser(new User(200221036,UserState.CONTINUOUS,Cargos.Aluno));
+        this.basededados.registerUser(new User(111111111,UserState.CONTINUOUS,Cargos.Professor));
+        this.basededados.registerUser(new User(222222222,UserState.CONTINUOUS,Cargos.Professor));
+        this.basededados.registerUser(new User(333333333,UserState.CONTINUOUS,Cargos.Professor));
         this.mainMenu.enableMenu();
         System.out.println("Database Size: " + this.basededados.getNumberOfRegistredUsers());
     }
@@ -54,7 +64,7 @@ public class LEI_200221030_200221070 {
 
     
     public void idkeyz() {
-        User user1 = new User(111111111, UserState.INFECTED);
+        User user1 = new User(111111111, UserState.INFECTED,Cargos.Aluno);
 
         user1.addGenerateID();
 
