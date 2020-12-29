@@ -131,10 +131,12 @@ public class User {
         }
 
         String[] newGeneratedIDs = Arrays.copyOf(this.generatedIDs, this.generatedIDs.length + 1);
-
-        newGeneratedIDs[this.generatedIDs.length] = RandomCodeGenerator.generateUniqueCode() + " - " + formatedDate;
+        this.currentIDToCast = RandomCodeGenerator.generateUniqueCode();
+        newGeneratedIDs[this.generatedIDs.length] = this.currentIDToCast + " - " + formatedDate;
 
         this.generatedIDs = Arrays.copyOf(newGeneratedIDs, newGeneratedIDs.length);
+        
+        
     }
 
     /**
@@ -200,5 +202,18 @@ public class User {
     public void deleteOldIDs() {
         deleteOldGeneretedIDs();
         deleteOldRecivedIDs();
+    }
+    
+    
+    
+    public void reciveID(String id){
+        LocalDate nowDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu");
+        String formatedDate = nowDate.format(formatter);
+        formatedDate = nowDate.format(formatter);
+        
+        String[] buffer = Arrays.copyOf(this.recivedIDs, this.recivedIDs.length + 1);
+        buffer[this.recivedIDs.length] = id + " - " + formatedDate;
+        this.recivedIDs = Arrays.copyOf(buffer,buffer.length);
     }
 }

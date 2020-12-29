@@ -135,7 +135,6 @@ public class Database {
                 if (this.userData[a] == null) continue;
                 this.userData[a -1] = this.userData[a];
             }
-            
             User[] buffer = Arrays.copyOf(this.userData,this.userData.length - 1);
             this.userData = Arrays.copyOf(buffer, buffer.length);
         }
@@ -160,7 +159,6 @@ public class Database {
                 if (this.userData[a] == null) continue;
                 this.userData[a -1] = this.userData[a];
             }
-            
             User[] buffer = Arrays.copyOf(this.userData,this.userData.length - 1);
             this.userData = Arrays.copyOf(buffer, buffer.length);
         }

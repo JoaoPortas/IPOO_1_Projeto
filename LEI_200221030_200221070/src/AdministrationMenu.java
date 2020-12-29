@@ -57,8 +57,12 @@ public class AdministrationMenu {
 
     private void menuHandler(){
         String[] options = {
-            "Enviar lista de alunos infetados hoje",
-            "Ver Estatisticas",
+            "Criar Utilizador",
+            "Eliminar Utilizador",
+            "Mostra lsta de utilizadores",
+            "Criar sala de aula",
+            "Eliminar sala de aula",
+            "Mostrar lista de sala",
             "Sair"
         };
         printMenu("Bem Vindo ao Sistema de rastreio, Área de Adminitração",options);

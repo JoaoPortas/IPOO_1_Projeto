@@ -1,5 +1,3 @@
-
-
 public class UserMenu {
     
     private InputReader inputReader;

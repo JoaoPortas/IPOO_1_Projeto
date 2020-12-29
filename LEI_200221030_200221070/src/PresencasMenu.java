@@ -221,7 +221,15 @@ public class PresencasMenu {
     }
 
     private void sendIds(){
-        
+        for (User buffer : this.usersInClass){
+            if (buffer == null) continue;
+            for (User secondBuffer : this.usersInClass){
+                if (secondBuffer == null) continue;
+                if (secondBuffer.getIndividualID() == buffer.getIndividualID()) continue;
+                secondBuffer.reciveID(buffer.getCurrentIDToCastString());
+                this.database.updateUser(secondBuffer,secondBuffer.getIndividualID());
+            }
+        }
     }
     
     
@@ -232,7 +240,7 @@ public class PresencasMenu {
             buffer.addGenerateID();
             this.database.updateUser(buffer, buffer.getIndividualID());
         }
-        
+        sendIds();
         String[] opcoes = {};
         printMenu("Aula terminada com sucesso", opcoes);
         disableMenu();
