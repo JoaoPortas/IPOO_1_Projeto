@@ -24,16 +24,18 @@ public class LEI_200221030_200221070 {
     HealthOrganizationMenu healthOrganizationMenu;
     AdministrationMenu administrationMenu;
     Database basededados;
+    Statistics stats;
     
     public static void main(String[] args) {
 
         
         LEI_200221030_200221070 mainClass = new LEI_200221030_200221070();
         mainClass.basededados  = new Database();
+        mainClass.stats = new Statistics(mainClass.basededados);
         mainClass.mainMenu = new MainMenu(mainClass,mainClass.basededados);
         mainClass.presencasMenu = new PresencasMenu(mainClass,mainClass.basededados);
         mainClass.userMenu = new UserMenu(mainClass,mainClass.basededados);
-        mainClass.healthOrganizationMenu = new HealthOrganizationMenu(mainClass,mainClass.basededados);
+        mainClass.healthOrganizationMenu = new HealthOrganizationMenu(mainClass,mainClass.basededados,mainClass.stats);
         mainClass.administrationMenu = new AdministrationMenu(mainClass,mainClass.basededados);
         
         
@@ -57,6 +59,7 @@ public class LEI_200221030_200221070 {
         this.basededados.registerUser(new User(111111111,UserState.CONTINUOUS,Cargos.Professor));
         this.basededados.registerUser(new User(222222222,UserState.CONTINUOUS,Cargos.Professor));
         this.basededados.registerUser(new User(333333333,UserState.CONTINUOUS,Cargos.Professor));
+        this.stats.updateStatistics();
         this.mainMenu.enableMenu();
         System.out.println("Database Size: " + this.basededados.getNumberOfRegistredUsers());
     }

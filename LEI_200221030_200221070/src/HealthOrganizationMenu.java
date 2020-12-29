@@ -9,14 +9,15 @@ public class HealthOrganizationMenu {
     private LEI_200221030_200221070 mainActivity;
     private int currentlyAvailableOptions;
     private Database database;
+    private Statistics stats;
     
-    
-    public HealthOrganizationMenu(LEI_200221030_200221070 mainActivity,Database database){
+    public HealthOrganizationMenu(LEI_200221030_200221070 mainActivity,Database database,Statistics stats){
         if (this.isActive == false){
             if (this.mainActivity == null){
                 this.mainActivity = mainActivity;
                 this.inputReader = new InputReader();
                 this.database = database;
+                this.stats = stats;
             }
         }
     }
@@ -65,7 +66,14 @@ public class HealthOrganizationMenu {
         printMenu("Bem Vindo ao Sistema de rastreio,Área de Adminitração de Saúde",options);
         this.currentlyAvailableOptions = options.length;
         int response = getResponse();
-        
+        switch (response){
+            case 1:
+                break;
+            case 2:
+                this.stats.showStatistics();
+                menuHandler();
+                break;
+        }
         if (response == this.currentlyAvailableOptions){
             disableMenu();
             this.mainActivity.changeMenu(0);
