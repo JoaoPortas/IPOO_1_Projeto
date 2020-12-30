@@ -10,6 +10,7 @@ public class AdministrationMenu {
     private int currentlyAvailableOptions;
     private Database database;
     
+    
     public AdministrationMenu(LEI_200221030_200221070 mainActivity,Database database){
         if (this.isActive == false){
             if (this.mainActivity == null){
@@ -72,6 +73,9 @@ public class AdministrationMenu {
             case 1:
                 registerUser();
                 break;
+            case 2:
+                removeUser();
+                break;
         }
         if (response == this.currentlyAvailableOptions){
             disableMenu();
@@ -79,6 +83,47 @@ public class AdministrationMenu {
         }
     }
 
+    private void removeUser(){
+        User newUser;
+        String[] options = new String[]{"Cancelar"};
+        printMenu("Insira Nº de identificação do Utilizador",options);
+        int response = getResponse();
+        switch (response){
+            case 1:
+                menuHandler();
+                break;
+            default:
+                 while (String.valueOf(response).length() != 9 && response != -1){
+                    options = new String[]{"Cancelar"};
+                    printMenu("Nº de indentificação inválido, tente novamente, (-1 para cancelar)",options);
+                    response = getResponse();
+                }
+                
+                if (response == -1){
+                    menuHandler();
+                    return;
+                }
+                
+                ErrorCode code = this.database.removeUserFromDB(response);
+                switch (code){
+                    case NoError:
+                        options = new String[]{};
+                        printMenu("Utilizador removido com sucesso",options);
+                        System.out.println("Prime 'enter' para continuar");
+                        this.inputReader.nextLine();
+                        menuHandler();
+                        break;
+                    case UserNotFound:
+                        options = new String[]{};
+                        printMenu(" Erro ao remover utilizador, utilizador não encontrado",options);
+                        System.out.println("Prime 'enter' para continuar");
+                        this.inputReader.nextLine();
+                        menuHandler();
+                        break;
+                }
+        }
+    }
+    
     
     public void registerUser(){
         User newUser;
@@ -91,10 +136,15 @@ public class AdministrationMenu {
                 menuHandler();
                 break;
             default:
-                while (String.valueOf(response).length() != 9){
+                while (String.valueOf(response).length() != 9 && response != -1){
                     options = new String[]{"Cancelar"};
-                    printMenu("Nº de indentificação inválido, tente novamente",options);
+                    printMenu("Nº de indentificação inválido, tente novamente, (-1 para cancelar)",options);
                     response = getResponse();
+                }
+                
+                if (response == -1){
+                    menuHandler();
+                    return;
                 }
                 
                 int UID = response;

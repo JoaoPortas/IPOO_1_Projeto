@@ -49,6 +49,71 @@ public class LEI_200221030_200221070 {
     }
 
     public void joao(){
+        
+        
+        
+        Classroom classroom = new Classroom(3,3,this.basededados,"F251");
+        Classroom classroom2 = new Classroom(4,4,this.basededados,"F252");
+        Classroom classroom3 = new Classroom(5,5,this.basededados,"F253");
+        Classroom classroom4 = new Classroom(6,6,this.basededados,"F254");
+        Classroom classroom5 = new Classroom(7,7,this.basededados,"F256");
+        classroom.drawMap();
+        
+        this.basededados.registerClassroom(classroom);
+        this.basededados.registerClassroom(classroom2);
+        this.basededados.registerClassroom(classroom3);
+        this.basededados.registerClassroom(classroom4);
+        this.basededados.registerClassroom(classroom5);
+        ErrorCode test = this.basededados.registerClassroom(classroom);
+        switch (test){
+            case ClassroomAlreadyRegistred:
+                System.out.println("Classroom Already Registred");
+        }
+        System.out.println("----------------Classroom List------------");
+        for (Classroom buffer : this.basededados.getAllClassrooms()){
+            if (buffer == null) continue;
+            System.out.println("UUID: " + buffer.getUUID());
+            System.out.println("Nome: " + buffer.getName());
+            System.out.println("Capacidade da Sala: " + buffer.getClassroomCapacity());
+            System.out.println("Linhas: " + buffer.getLinhas());
+            System.out.println("Colunas: " + buffer.getColunas());
+            System.out.println("-----------------------------------------");
+            
+            
+            
+        }
+        System.out.println("----------------Removing Classroom F253------------");
+        this.basededados.removeClassroom("F253", false);
+        System.out.println("----------------Classroom List------------");
+        for (Classroom buffer : this.basededados.getAllClassrooms()){
+            if (buffer == null) continue;
+            System.out.println("UUID: " + buffer.getUUID());
+            System.out.println("Nome: " + buffer.getName());
+            System.out.println("Capacidade da Sala: " + buffer.getClassroomCapacity());
+            System.out.println("Linhas: " + buffer.getLinhas());
+            System.out.println("Colunas: " + buffer.getColunas());
+            System.out.println("-----------------------------------------");
+            
+            
+            
+        }
+        System.out.println("----------------Updating Classroom F256------------");
+        Classroom temp = this.basededados.getClassroom("F256",false);
+        temp.updateCapacity(8,8);
+        
+        for (Classroom buffer : this.basededados.getAllClassrooms()){
+            if (buffer == null) continue;
+            System.out.println("UUID: " + buffer.getUUID());
+            System.out.println("Nome: " + buffer.getName());
+            System.out.println("Capacidade da Sala: " + buffer.getClassroomCapacity());
+            System.out.println("Linhas: " + buffer.getLinhas());
+            System.out.println("Colunas: " + buffer.getColunas());
+            System.out.println("-----------------------------------------");
+            
+            
+            
+        }
+
         this.basededados.registerUser(new User(200221030,UserState.CONTINUOUS,Cargos.Aluno));
         this.basededados.registerUser(new User(200221031,UserState.CONTINUOUS,Cargos.Aluno));
         this.basededados.registerUser(new User(200221032,UserState.CONTINUOUS,Cargos.Aluno));
@@ -59,9 +124,8 @@ public class LEI_200221030_200221070 {
         this.basededados.registerUser(new User(111111111,UserState.CONTINUOUS,Cargos.Professor));
         this.basededados.registerUser(new User(222222222,UserState.CONTINUOUS,Cargos.Professor));
         this.basededados.registerUser(new User(333333333,UserState.CONTINUOUS,Cargos.Professor));
-        this.stats.updateStatistics();
         this.mainMenu.enableMenu();
-        System.out.println("Database Size: " + this.basededados.getNumberOfRegistredUsers());
+        
     }
 
 

@@ -14,5 +14,7 @@ public enum ErrorCode {
     NoError,
     UnknownErrorUpdatingData,
     UnknownErrorRemovingUser,
-    UnknownErrorRegisteringUser
+    UnknownErrorRegisteringUser,
+    ClassroomAlreadyRegistred,
+    ClassroomNotFound
 }
