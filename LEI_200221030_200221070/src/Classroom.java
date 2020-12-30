@@ -76,7 +76,7 @@ public class Classroom {
     }
     
     //TODO change return type?
-    public void getContacts(){
-        
+    public String[] getContacts(){
+        return null;
     }
 }
