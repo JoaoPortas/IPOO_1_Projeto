@@ -63,7 +63,7 @@ public class AdministrationMenu {
             "Mostra lsta de utilizadores",
             "Criar sala de aula",
             "Eliminar sala de aula",
-            "Mostrar lista de sala",
+            "Mostrar lista de salas de aulas",
             "Sair"
         };
         printMenu("Bem Vindo ao Sistema de rastreio, Área de Adminitração",options);
