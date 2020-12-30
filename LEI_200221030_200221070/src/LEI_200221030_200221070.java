@@ -64,56 +64,6 @@ public class LEI_200221030_200221070 {
         this.basededados.registerClassroom(classroom3);
         this.basededados.registerClassroom(classroom4);
         this.basededados.registerClassroom(classroom5);
-        ErrorCode test = this.basededados.registerClassroom(classroom);
-        switch (test){
-            case ClassroomAlreadyRegistred:
-                System.out.println("Classroom Already Registred");
-        }
-        System.out.println("----------------Classroom List------------");
-        for (Classroom buffer : this.basededados.getAllClassrooms()){
-            if (buffer == null) continue;
-            System.out.println("UUID: " + buffer.getUUID());
-            System.out.println("Nome: " + buffer.getName());
-            System.out.println("Capacidade da Sala: " + buffer.getClassroomCapacity());
-            System.out.println("Linhas: " + buffer.getLinhas());
-            System.out.println("Colunas: " + buffer.getColunas());
-            System.out.println("-----------------------------------------");
-            
-            
-            
-        }
-        System.out.println("----------------Removing Classroom F253------------");
-        this.basededados.removeClassroom("F253", false);
-        System.out.println("----------------Classroom List------------");
-        for (Classroom buffer : this.basededados.getAllClassrooms()){
-            if (buffer == null) continue;
-            System.out.println("UUID: " + buffer.getUUID());
-            System.out.println("Nome: " + buffer.getName());
-            System.out.println("Capacidade da Sala: " + buffer.getClassroomCapacity());
-            System.out.println("Linhas: " + buffer.getLinhas());
-            System.out.println("Colunas: " + buffer.getColunas());
-            System.out.println("-----------------------------------------");
-            
-            
-            
-        }
-        System.out.println("----------------Updating Classroom F256------------");
-        Classroom temp = this.basededados.getClassroom("F256",false);
-        temp.updateCapacity(8,8);
-        
-        for (Classroom buffer : this.basededados.getAllClassrooms()){
-            if (buffer == null) continue;
-            System.out.println("UUID: " + buffer.getUUID());
-            System.out.println("Nome: " + buffer.getName());
-            System.out.println("Capacidade da Sala: " + buffer.getClassroomCapacity());
-            System.out.println("Linhas: " + buffer.getLinhas());
-            System.out.println("Colunas: " + buffer.getColunas());
-            System.out.println("-----------------------------------------");
-            
-            
-            
-        }
-
         this.basededados.registerUser(new User(200221030,UserState.CONTINUOUS,Cargos.Aluno));
         this.basededados.registerUser(new User(200221031,UserState.CONTINUOUS,Cargos.Aluno));
         this.basededados.registerUser(new User(200221032,UserState.CONTINUOUS,Cargos.Aluno));

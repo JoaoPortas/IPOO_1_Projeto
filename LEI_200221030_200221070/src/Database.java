@@ -13,7 +13,7 @@ public class Database {
     
     private User[] userData = null;
     private Classroom[] classroomData = null;
-    
+    private Classroom[] aulas = null;
     
     /**
      * Contrutor para a classe Database, esta não requere parametros
@@ -212,11 +212,11 @@ public class Database {
         for (Classroom classroomBuffer : this.classroomData){
             if (classroomBuffer == null) continue;
             if (searchByUUID){
-                if (classroomBuffer.getUUID() == classroomNameOrUUID){
+                if (classroomBuffer.getUUID().equals(classroomNameOrUUID)){
                     return c;
                 }
             }else{
-                if (classroomBuffer.getName() == classroomNameOrUUID){
+                if (classroomBuffer.getName().equals(classroomNameOrUUID)){
                     return c;
                 }
             }
@@ -262,7 +262,7 @@ public class Database {
             this.classroomData = Arrays.copyOf(buffer, buffer.length);
         }
         else{
-            return ErrorCode.UserNotFound;
+            return ErrorCode.ClassroomNotFound;
         }
         return ErrorCode.NoError;
     }

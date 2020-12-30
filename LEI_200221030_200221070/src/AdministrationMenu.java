@@ -76,6 +76,62 @@ public class AdministrationMenu {
             case 2:
                 removeUser();
                 break;
+            case 3:
+                String status = "";
+                System.out.println("----------------Utilizadores na Base de dados:-------------------");
+                for (User buffer : database.getAllUsers()){
+                    if (buffer == null) continue;
+                    System.out.println("Id: " + buffer.getIndividualID());
+
+                    switch (buffer.getStatus()){
+                        case CONTINUOUS:
+                            status = "Em Continuo";
+                            break;
+                        case INFECTED:
+                            status = "Em Infectado";
+                            break;
+                        case ISOLATION:
+                             status = "Em Isolamento";
+                             break;
+                    }
+                    System.out.println("Estado: " + status);
+                    System.out.println("Tipo de Utilizador: " + buffer.getCargo());
+                    System.out.println("GeneratedIds: {");
+                    for (String stringBuffer : buffer.getGeneraredIDs()){
+                        System.out.println("'"  + stringBuffer + "'");
+                    }
+                    System.out.println("}");
+                    System.out.println("RecivedIDs: {");
+                    for (String stringBuffer : buffer.getRecivedIDs()){
+                        System.out.println("'"  + stringBuffer + "'");
+                    }
+                    System.out.println("}");
+                    System.out.println("-------------------------------------------------");
+                }
+                System.out.println("Prima 'enter' para continuar");
+                this.inputReader.nextLine();
+                menuHandler();
+                break;
+            case 4:
+                registerClassroom();
+                break;
+            case 5:
+                removeClassroom();
+                break;
+            case 6:
+                System.out.println("----------------Salas de aula na Base de dados:-------------------");
+                for (Classroom buffer : database.getAllClassrooms()){
+                    if (buffer == null) continue;
+                    System.out.println("Nome: " + buffer.getName());
+                    System.out.println("Capacidade da Sala: " + buffer.getClassroomCapacity());
+                    System.out.println("Linhas: " + buffer.getLinhas());
+                    System.out.println("Colunas: " + buffer.getColunas());
+                    System.out.println("-------------------------------------------------");
+                }
+                System.out.println("Prima 'enter' para continuar");
+                this.inputReader.nextLine();
+                menuHandler();
+                break;
         }
         if (response == this.currentlyAvailableOptions){
             disableMenu();
@@ -124,6 +180,35 @@ public class AdministrationMenu {
         }
     }
     
+    public void removeClassroom(){
+        String[] options = new String[]{"Cancelar"};
+        printMenu("Insira Nome da sala",options);
+        String resposta = getResponseString();
+        if (resposta.equals("1")){
+            menuHandler();
+            return;
+        }
+        
+        ErrorCode code = this.database.removeClassroom(resposta, false);
+        switch (code){
+            case NoError:
+                options = new String[]{};
+                printMenu("Sala removida Com Sucesso",options);
+                System.out.println("Prima 'enter' para continuar");
+                this.inputReader.nextLine();
+                menuHandler();
+                break;
+            case ClassroomNotFound:
+                options = new String[]{};
+                printMenu("sala não removida, sala não encontrada",options);
+                System.out.println("Prima 'enter' para continuar");
+                this.inputReader.nextLine();
+                menuHandler();
+                break;
+                
+        }
+        
+    }
     
     public void registerUser(){
         User newUser;
@@ -209,6 +294,56 @@ public class AdministrationMenu {
         
     }
     
+    public void registerClassroom(){
+        Classroom classroomToRegister;
+        String[] options = new String[]{"Cancelar"};
+        printMenu("Insira o nome da sala",options);
+        String response = getResponseString();
+        if (response.equals("1")){
+            menuHandler();
+            return;
+        }
+        String nomeDaSala = response;
+        options = new String[]{"Cancelar"};
+        printMenu("Insira o número de colunas na sala",options);
+        int response2 = getResponse();
+        while (response2 < 1){
+            options = new String[]{"Cancelar"};
+            printMenu("Insira o número de colunas na sala",options);
+            response2 = getResponse();
+        }
+        int colunas = response2;
+        
+        
+        options = new String[]{"Cancelar"};
+        printMenu("Insira o número de linhas na sala",options);
+        response2 = getResponse();
+        while (response2 < 1){
+            options = new String[]{"Cancelar"};
+            printMenu("Insira o número de linhas na sala",options);
+            response2 = getResponse();
+        }
+        int linhas = response2;
+        
+        classroomToRegister = new Classroom(colunas,linhas,this.database,nomeDaSala);
+        ErrorCode registerResult = this.database.registerClassroom(classroomToRegister);
+        switch (registerResult){
+            case NoError:
+                options = new String[]{};
+                printMenu("Sala Registada Com Sucesso",options);
+                System.out.println("Prima 'enter' para continuar");
+                this.inputReader.nextLine();
+                menuHandler();
+                break;
+            case ClassroomAlreadyRegistred:
+                options = new String[]{};
+                printMenu("Sala não Registada, sala já se encontrava registada",options);
+                System.out.println("Prima 'enter' para continuar");
+                this.inputReader.nextLine();
+                menuHandler();
+                break;
+        }
+    }
     
     private void disableMenu(){
         this.isActive = false;
@@ -219,4 +354,7 @@ public class AdministrationMenu {
         return this.inputReader.getIntegerNumber("Opção");
     }
 
+    private String getResponseString(){
+        return this.inputReader.getText("Opção");
+    }
 }
