@@ -51,7 +51,6 @@ public class LEI_200221030_200221070 {
     public void joao(){
         
         
-        
         Classroom classroom = new Classroom(3,3,this.basededados,"F251");
         Classroom classroom2 = new Classroom(4,4,this.basededados,"F252");
         Classroom classroom3 = new Classroom(5,5,this.basededados,"F253");
@@ -73,11 +72,8 @@ public class LEI_200221030_200221070 {
         this.basededados.registerUser(new User(200221036,UserState.CONTINUOUS,Cargos.Aluno));
         this.basededados.registerUser(new User(111111111,UserState.CONTINUOUS,Cargos.Professor));
         this.basededados.registerUser(new User(222222222,UserState.CONTINUOUS,Cargos.Professor));
-        this.basededados.registerUser(new User(333333333,UserState.INFECTED,Cargos.Professor));
-        
-        HealthOrganization ho1 = new HealthOrganization(this.basededados);
-        ho1.fun();
-
+        this.basededados.registerUser(new User(333333333,UserState.CONTINUOUS,Cargos.Professor));
+        this.stats.updateStatistics();
         this.mainMenu.enableMenu();
         
         
