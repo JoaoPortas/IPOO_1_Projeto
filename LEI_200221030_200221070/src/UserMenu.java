@@ -137,5 +137,4 @@ public class UserMenu {
     private int getResponse(){
         return this.inputReader.getIntegerNumber("Opção");
     }
-
 }
