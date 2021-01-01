@@ -43,6 +43,7 @@ public class PresencasMenu {
         }
         
         if (gotUser.getCargo() == Cargos.Professor){
+            gotUser.addGenerateID();
             addUserToClassArray(gotUser);
             this.menuHandler();
         }else{
