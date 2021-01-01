@@ -23,7 +23,23 @@ public class HealthOrganization {
         return this.listOfCodesOfInfecteds;
     }
 
-    
+    private void getContactsOfInfectedUser(String[] codes) {
+        User[] twoWayBuffer = new User[0];
+        
+        for (String buffer : codes) {
+            User userBuffer = this.baseDeDados.getUser(buffer);
+            if (!userBuffer.getStatus().equals(UserState.ISOLATION)) {
+                if (!Arrays.stream(twoWayBuffer).anyMatch(userBuffer::equals)) {
+                    userBuffer.setStatus(UserState.ISOLATION);
+                    userBuffer.setDateOfChangedStatus();
+
+                    twoWayBuffer = Arrays.copyOf(twoWayBuffer, twoWayBuffer.length + 1);
+                    twoWayBuffer[twoWayBuffer.length] = userBuffer;
+                }
+            }
+        }
+    }
+
     public void checkUsersContacts() {
         User twoWayBuffer = null;
         String[] contacts;
@@ -31,9 +47,8 @@ public class HealthOrganization {
             if (twoWayBuffer == null){
                 User userBuffer = this.baseDeDados.getUser(buffer);
                 if (userBuffer == null) continue;
-                for (String userBufferContact : userBuffer.getRecivedIDs()){
-                    
-                }
+                getContactsOfInfectedUser(userBuffer.getRecivedIDs());
+
                 twoWayBuffer = userBuffer;
             }else{
                 if (twoWayBuffer.equals(this.baseDeDados.getUser(buffer))) continue;

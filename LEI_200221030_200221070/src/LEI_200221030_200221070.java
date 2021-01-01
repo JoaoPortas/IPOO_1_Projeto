@@ -84,16 +84,6 @@ public class LEI_200221030_200221070 {
 
     
     public void idkeyz() {
-        /*User user1 = new User(111111111, UserState.INFECTED,Cargos.Aluno);
-
-        user1.addGenerateID();
-
-        user1.addGenerateID();
-        
-        System.out.println(user1.getDateOfChangedStatus());*/
-        //joao();
-        //HealthOrganization ho1 = new HealthOrganization();
-        //ho1.fun();
 
         Classroom classroom = new Classroom(3,3,this.basededados,"F251");
         Classroom classroom2 = new Classroom(4,4,this.basededados,"F252");
@@ -118,6 +108,10 @@ public class LEI_200221030_200221070 {
         this.basededados.registerUser(new User(222222222,UserState.INFECTED,Cargos.Professor));
         this.basededados.registerUser(new User(333333333,UserState.INFECTED,Cargos.Professor));
         this.stats.updateStatistics();
+
+        
+        this.healthOrganization.addOnListOfInfecteds(this.basededados.getUser(333333333).getRecivedIDs());
+
         this.mainMenu.enableMenu();
     }    
     
