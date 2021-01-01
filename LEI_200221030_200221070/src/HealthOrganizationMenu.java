@@ -74,10 +74,23 @@ public class HealthOrganizationMenu {
                 //TODO atualizar estatisticas
                 /*Apagar*/
                 HealthOrganization ho1 = new HealthOrganization(database);
-                ho1.addOnListOfInfecteds();
+                for (User temp : database.getAllUsers()) {
+                    if (temp != null) {
+                        System.out.println(temp.getStatus());
+                        if (temp.getStatus().equals(UserState.INFECTED)) {
+                            ho1.addOnListOfInfecteds(temp.getGeneraredIDs());
+                        }
+                    }
+                    
+                    /**/
+                }
+
+                ho1.checkUsersContacts();
+                /*HealthOrganization ho1 = new HealthOrganization(database);
+                //ho1.addOnListOfInfecteds();
                 for (String temp : ho1.getListOfCodesOfInfdStrings()) {
                     System.out.println(temp);
-                }
+                }*/
                 /***** */
                 break;
             case 2:

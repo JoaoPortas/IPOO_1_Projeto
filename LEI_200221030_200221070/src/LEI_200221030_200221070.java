@@ -108,9 +108,9 @@ public class LEI_200221030_200221070 {
         this.basededados.registerUser(new User(222222222,UserState.INFECTED,Cargos.Professor));
         this.basededados.registerUser(new User(333333333,UserState.INFECTED,Cargos.Professor));
         this.stats.updateStatistics();
+        //this.healthOrganization
 
-        
-        this.healthOrganization.addOnListOfInfecteds(this.basededados.getUser(333333333).getRecivedIDs());
+        //this.healthOrganization.addOnListOfInfecteds(this.basededados.getUser(333333333).getRecivedIDs());
 
         this.mainMenu.enableMenu();
     }    

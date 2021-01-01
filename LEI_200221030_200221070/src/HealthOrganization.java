@@ -28,13 +28,20 @@ public class HealthOrganization {
         
         for (String buffer : codes) {
             User userBuffer = this.baseDeDados.getUser(buffer);
-            if (!userBuffer.getStatus().equals(UserState.ISOLATION)) {
+            if (!userBuffer.getStatus().equals(UserState.ISOLATION) && !userBuffer.getStatus().equals(UserState.INFECTED)) {
                 if (!Arrays.stream(twoWayBuffer).anyMatch(userBuffer::equals)) {
+                    /**Apagar */
+                    UserState j = userBuffer.getStatus();
+                    /**APAGAR */
                     userBuffer.setStatus(UserState.ISOLATION);
                     userBuffer.setDateOfChangedStatus();
 
                     twoWayBuffer = Arrays.copyOf(twoWayBuffer, twoWayBuffer.length + 1);
-                    twoWayBuffer[twoWayBuffer.length] = userBuffer;
+                    twoWayBuffer[twoWayBuffer.length - 1] = userBuffer;
+                    /**APAGAR */
+                    System.out.println("TESTE:");
+                    System.out.println(userBuffer.getIndividualID() + " foi alterado do estado " + j.toString() + " para " + userBuffer.getStatus().toString());
+                    /**APAGAR */
                 }
             }
         }
