@@ -7,13 +7,17 @@ public class UserMenu {
     private User userObject;
     private Database database;
     int userId = -1;
-
-    public UserMenu(LEI_200221030_200221070 mainActivity,Database database){
+    private Statistics stats;
+    private HealthOrganization healthOrganization;
+    
+    public UserMenu(LEI_200221030_200221070 mainActivity,Database database,HealthOrganization healthOrganization,Statistics stats){
         if (this.isActive == false){
             if (this.mainActivity == null){
                 this.mainActivity = mainActivity;
                 this.inputReader = new InputReader();
                 this.database = database;
+                this.healthOrganization = healthOrganization;
+                this.stats = stats;
             }
         }
     }
@@ -112,6 +116,7 @@ public class UserMenu {
         int response = getResponse();
         switch (response){
             case 2:
+                //TODO 
                 this.userObject.setStatus(UserState.INFECTED);
                 this.database.updateUser(userObject, userObject.getIndividualID());
                 
@@ -120,6 +125,10 @@ public class UserMenu {
                 printMenu(titles,options);
                 System.out.println("Prima 'enter' para continuar");
                 this.inputReader.nextLine();
+                menuHandler();
+                break;
+            case 5:
+                this.stats.showStatistics();
                 menuHandler();
                 break;
             case 6:
