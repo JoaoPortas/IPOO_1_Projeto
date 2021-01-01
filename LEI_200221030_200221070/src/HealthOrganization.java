@@ -23,10 +23,28 @@ public class HealthOrganization {
         return this.listOfCodesOfInfecteds;
     }
 
+    
     public void checkUsersContacts() {
-        /*for (User cache : this.baseDeDados.getAllUsers()) {
-            if (Array.asList())«
-        }*/
+        User twoWayBuffer = null;
+        String[] contacts;
+        for (String buffer : this.listOfCodesOfInfecteds){
+            if (twoWayBuffer == null){
+                User userBuffer = this.baseDeDados.getUser(buffer);
+                if (userBuffer == null) continue;
+                for (String userBufferContact : userBuffer.getRecivedIDs()){
+                    
+                }
+                twoWayBuffer = userBuffer;
+            }else{
+                if (twoWayBuffer.equals(this.baseDeDados.getUser(buffer))) continue;
+                User userBuffer = this.baseDeDados.getUser(buffer);
+                if (userBuffer == null) continue;
+                for (String userBufferContact : userBuffer.getRecivedIDs()){
+                    
+                }
+                twoWayBuffer = userBuffer;
+            }
+        }
     }
 
     /**
