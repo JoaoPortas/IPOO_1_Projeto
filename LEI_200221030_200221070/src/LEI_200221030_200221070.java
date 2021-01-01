@@ -25,6 +25,7 @@ public class LEI_200221030_200221070 {
     AdministrationMenu administrationMenu;
     Database basededados;
     Statistics stats;
+    HealthOrganization healthOrganization;
     
     public static void main(String[] args) {
 
@@ -32,10 +33,11 @@ public class LEI_200221030_200221070 {
         LEI_200221030_200221070 mainClass = new LEI_200221030_200221070();
         mainClass.basededados  = new Database();
         mainClass.stats = new Statistics(mainClass.basededados);
+        mainClass.healthOrganization = new HealthOrganization(mainClass.basededados);
         mainClass.mainMenu = new MainMenu(mainClass,mainClass.basededados);
         mainClass.presencasMenu = new PresencasMenu(mainClass,mainClass.basededados);
-        mainClass.userMenu = new UserMenu(mainClass,mainClass.basededados);
-        mainClass.healthOrganizationMenu = new HealthOrganizationMenu(mainClass,mainClass.basededados,mainClass.stats);
+        mainClass.userMenu = new UserMenu(mainClass,mainClass.basededados,mainClass.healthOrganization);
+        mainClass.healthOrganizationMenu = new HealthOrganizationMenu(mainClass,mainClass.basededados,mainClass.stats,mainClass.healthOrganization);
         mainClass.administrationMenu = new AdministrationMenu(mainClass,mainClass.basededados);
         
         
