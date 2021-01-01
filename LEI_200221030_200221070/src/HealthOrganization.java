@@ -25,7 +25,7 @@ public class HealthOrganization {
 
     public void checkUsersContacts() {
         /*for (User cache : this.baseDeDados.getAllUsers()) {
-            if (Array.asList())
+            if (Array.asList())«
         }*/
     }
 
