@@ -70,6 +70,13 @@ public class HealthOrganizationMenu {
             case 1:
                 //TODO enviar generatedIds para lá
                 //TODO atualizar estatisticas
+                /*Apagar*/
+                HealthOrganization ho1 = new HealthOrganization(database);
+                ho1.addOnListOfInfecteds();
+                for (String temp : ho1.getListOfCodesOfInfdStrings()) {
+                    System.out.println(temp);
+                }
+                /***** */
                 break;
             case 2:
                 this.stats.showStatistics();

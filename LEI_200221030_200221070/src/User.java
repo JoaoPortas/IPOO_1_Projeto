@@ -158,11 +158,11 @@ public class User {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu");
         String formatedDate = nowDate.format(formatter);
 
-        if (this.generatedIDs.length == 0) {
+        /*if (this.generatedIDs.length == 0) {
             formatedDate = (nowDate.minusDays(20)).format(formatter);
         } else {
             formatedDate = nowDate.format(formatter);
-        }
+        }*/
 
         String[] newGeneratedIDs = Arrays.copyOf(this.generatedIDs, this.generatedIDs.length + 1);
         this.currentIDToCast = RandomCodeGenerator.generateUniqueCode();
