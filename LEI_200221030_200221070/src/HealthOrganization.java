@@ -32,7 +32,13 @@ public class HealthOrganization {
     /**
      * Adiciona os IDs gerados pelos utilizadores infetados á lista de IDs de utilizadores infetados da  organização de saúde
      */
-    public void addOnListOfInfecteds() {
+    public void addOnListOfInfecteds(String[] codesOfInfectedUser) {
+        int lenghtOfUserGeneratedCodes = codesOfInfectedUser.length;
+        String[] concatOfArrays = new String[lenghtOfUserGeneratedCodes + this.listOfCodesOfInfecteds.length];
+        System.arraycopy(this.listOfCodesOfInfecteds, 0, concatOfArrays, 0, this.listOfCodesOfInfecteds.length);
+        System.arraycopy(codesOfInfectedUser, 0, concatOfArrays, this.listOfCodesOfInfecteds.length, codesOfInfectedUser.length);
+        this.listOfCodesOfInfecteds = Arrays.copyOf(concatOfArrays, concatOfArrays.length);
+
         /*int lenghtOfUserGeneratedCodes;
 
         for (User cache : this.baseDeDados.getAllUsers()) {
