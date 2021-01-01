@@ -74,7 +74,7 @@ public class LEI_200221030_200221070 {
         this.basededados.registerUser(new User(200221036,UserState.CONTINUOUS,Cargos.Aluno));
         this.basededados.registerUser(new User(111111111,UserState.CONTINUOUS,Cargos.Professor));
         this.basededados.registerUser(new User(222222222,UserState.CONTINUOUS,Cargos.Professor));
-        this.basededados.registerUser(new User(333333333,UserState.CONTINUOUS,Cargos.Professor));
+        this.basededados.registerUser(new User(333333333,UserState.INFECTED,Cargos.Professor));
         this.stats.updateStatistics();
         this.mainMenu.enableMenu();
         
@@ -91,9 +91,34 @@ public class LEI_200221030_200221070 {
         user1.addGenerateID();
         
         System.out.println(user1.getDateOfChangedStatus());*/
-        joao();
+        //joao();
         //HealthOrganization ho1 = new HealthOrganization();
         //ho1.fun();
+
+        Classroom classroom = new Classroom(3,3,this.basededados,"F251");
+        Classroom classroom2 = new Classroom(4,4,this.basededados,"F252");
+        Classroom classroom3 = new Classroom(5,5,this.basededados,"F253");
+        Classroom classroom4 = new Classroom(6,6,this.basededados,"F254");
+        Classroom classroom5 = new Classroom(7,7,this.basededados,"F256");
+        classroom.drawMap();
+        
+        this.basededados.registerClassroom(classroom);
+        this.basededados.registerClassroom(classroom2);
+        this.basededados.registerClassroom(classroom3);
+        this.basededados.registerClassroom(classroom4);
+        this.basededados.registerClassroom(classroom5);
+        this.basededados.registerUser(new User(200221030,UserState.INFECTED,Cargos.Aluno));
+        this.basededados.registerUser(new User(200221031,UserState.CONTINUOUS,Cargos.Aluno));
+        this.basededados.registerUser(new User(200221032,UserState.CONTINUOUS,Cargos.Aluno));
+        this.basededados.registerUser(new User(200221033,UserState.CONTINUOUS,Cargos.Aluno));
+        this.basededados.registerUser(new User(200221034,UserState.CONTINUOUS,Cargos.Aluno));
+        this.basededados.registerUser(new User(200221035,UserState.CONTINUOUS,Cargos.Aluno));
+        this.basededados.registerUser(new User(200221036,UserState.CONTINUOUS,Cargos.Aluno));
+        this.basededados.registerUser(new User(111111111,UserState.CONTINUOUS,Cargos.Professor));
+        this.basededados.registerUser(new User(222222222,UserState.INFECTED,Cargos.Professor));
+        this.basededados.registerUser(new User(333333333,UserState.INFECTED,Cargos.Professor));
+        this.stats.updateStatistics();
+        this.mainMenu.enableMenu();
     }    
     
     public void closeApplication(){

@@ -70,7 +70,15 @@ public class HealthOrganizationMenu {
         int response = getResponse();
         switch (response){
             case 1:
-                //this.healthOrganization.addOnListOfInfecteds();
+                //TODO enviar generatedIds para lá
+                //TODO atualizar estatisticas
+                /*Apagar*/
+                HealthOrganization ho1 = new HealthOrganization(database);
+                ho1.addOnListOfInfecteds();
+                for (String temp : ho1.getListOfCodesOfInfdStrings()) {
+                    System.out.println(temp);
+                }
+                /***** */
                 break;
             case 2:
                 this.stats.showStatistics();

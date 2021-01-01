@@ -1,4 +1,6 @@
+import java.lang.reflect.Array;
 import java.util.Arrays;
+
 /**
  * Class da organização de saúde
  * @author João Gouveia e João Portas
@@ -13,11 +15,48 @@ public class HealthOrganization {
         this.baseDeDados = basededados;
     }
 
-    public void addOnListOfInfecteds(String[] listOfGeneratedCodes) {
-        String[] newListOfCodesOfInfecteds = Arrays.copyOf(this.listOfCodesOfInfecteds, this.listOfCodesOfInfecteds.length + 1);
-        //newListOfCodesOfInfecteds[this.listOfCodesOfInfecteds.length] = this.currentIDToCast + " - " + formatedDate;
+    /**
+     * Lista de todos os IDs gerados por utilizadores infetados
+     * @return retorna as lista de IDs de user infetados
+     */
+    public String[] getListOfCodesOfInfdStrings() {
+        return this.listOfCodesOfInfecteds;
+    }
 
-        //this.generatedIDs = Arrays.copyOf(newGeneratedIDs, newGeneratedIDs.length);
+    public void checkUsersContacts() {
+        /*for (User cache : this.baseDeDados.getAllUsers()) {
+            if (Array.asList())«
+        }*/
+    }
+
+    /**
+     * Adiciona os IDs gerados pelos utilizadores infetados á lista de IDs de utilizadores infetados da  organização de saúde
+     */
+    public void addOnListOfInfecteds(String[] codesOfInfectedUser) {
+        int lenghtOfUserGeneratedCodes = codesOfInfectedUser.length;
+        String[] concatOfArrays = new String[lenghtOfUserGeneratedCodes + this.listOfCodesOfInfecteds.length];
+        System.arraycopy(this.listOfCodesOfInfecteds, 0, concatOfArrays, 0, this.listOfCodesOfInfecteds.length);
+        System.arraycopy(codesOfInfectedUser, 0, concatOfArrays, this.listOfCodesOfInfecteds.length, codesOfInfectedUser.length);
+        this.listOfCodesOfInfecteds = Arrays.copyOf(concatOfArrays, concatOfArrays.length);
+
+        /*int lenghtOfUserGeneratedCodes;
+
+        for (User cache : this.baseDeDados.getAllUsers()) {
+            if (cache != null) {
+                if (cache.getStatus() == UserState.INFECTED) {
+                    lenghtOfUserGeneratedCodes = cache.getGeneraredIDs().length;
+                    String[] concatOfArrays = new String[lenghtOfUserGeneratedCodes + this.listOfCodesOfInfecteds.length];
+                    System.arraycopy(this.listOfCodesOfInfecteds, 0, concatOfArrays, 0, this.listOfCodesOfInfecteds.length);
+                    System.arraycopy(cache.getGeneraredIDs(), 0, concatOfArrays, this.listOfCodesOfInfecteds.length, cache.getGeneraredIDs().length);
+
+                    //for (int i = 0; i < concatOfArrays.length; i++) {
+                      //  System.out.print( concatOfArrays[i] + ", " );
+                    //}
+
+                    this.listOfCodesOfInfecteds = Arrays.copyOf(concatOfArrays, concatOfArrays.length);
+                }
+            }    
+        }*/
     }
 
     public void fun() {
