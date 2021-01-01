@@ -9,15 +9,17 @@ public class HealthOrganizationMenu {
     private LEI_200221030_200221070 mainActivity;
     private int currentlyAvailableOptions;
     private Database database;
+    private HealthOrganization healthOrganization;
     private Statistics stats;
     
-    public HealthOrganizationMenu(LEI_200221030_200221070 mainActivity,Database database,Statistics stats){
+    public HealthOrganizationMenu(LEI_200221030_200221070 mainActivity,Database database,Statistics stats,HealthOrganization healthOrganization){
         if (this.isActive == false){
             if (this.mainActivity == null){
                 this.mainActivity = mainActivity;
                 this.inputReader = new InputReader();
                 this.database = database;
                 this.stats = stats;
+                this.healthOrganization = healthOrganization;
             }
         }
     }
@@ -68,8 +70,7 @@ public class HealthOrganizationMenu {
         int response = getResponse();
         switch (response){
             case 1:
-                //TODO enviar generatedIds para lá
-                //TODO atualizar estatisticas
+                //this.healthOrganization.addOnListOfInfecteds();
                 break;
             case 2:
                 this.stats.showStatistics();
