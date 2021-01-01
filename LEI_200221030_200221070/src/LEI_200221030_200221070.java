@@ -36,7 +36,7 @@ public class LEI_200221030_200221070 {
         mainClass.healthOrganization = new HealthOrganization(mainClass.basededados);
         mainClass.mainMenu = new MainMenu(mainClass,mainClass.basededados);
         mainClass.presencasMenu = new PresencasMenu(mainClass,mainClass.basededados);
-        mainClass.userMenu = new UserMenu(mainClass,mainClass.basededados,mainClass.healthOrganization);
+        mainClass.userMenu = new UserMenu(mainClass,mainClass.basededados,mainClass.healthOrganization,mainClass.stats);
         mainClass.healthOrganizationMenu = new HealthOrganizationMenu(mainClass,mainClass.basededados,mainClass.stats,mainClass.healthOrganization);
         mainClass.administrationMenu = new AdministrationMenu(mainClass,mainClass.basededados);
         
