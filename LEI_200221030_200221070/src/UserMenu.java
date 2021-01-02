@@ -115,6 +115,13 @@ public class UserMenu {
         printMenu(titles,options);
         int response = getResponse();
         switch (response){
+            case 1:
+                titles = this.healthOrganization.recomendations(this.userObject.getStatus());
+                options = new String[]{"Voltar"};
+                printMenu(titles,options);
+                getResponse();
+                menuHandler();
+                break;
             case 2:
                 //TODO 
                 this.healthOrganization.addOnListOfInfecteds(userObject.getGeneraredIDs());
