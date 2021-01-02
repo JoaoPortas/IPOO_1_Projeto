@@ -17,7 +17,8 @@ public class Statistics {
     private int isolationsToday = 0;
     private int continuousNumber = 0;
     private Database database;
-    
+    private boolean newDayInf = true;
+    private boolean newDayIso = true;
     /**
      * 
      */
@@ -27,25 +28,9 @@ public class Statistics {
     }
     
     
-    public void updateStatistics(){
-        this.infectionsToday = 0;
-        this.isolationsToday = 0;
-        for (User buffer : this.database.getAllUsers()){
-            if (buffer == null) continue;
-            switch (buffer.getStatus()){
-                case INFECTED:
-                    this.infectionsToday++;
-                    this.infectedNumber++;
-                    break;
-                case ISOLATION:
-                    this.isolationNumber++;
-                    this.isolationsToday++;
-                    break;
-                case CONTINUOUS:
-                    this.continuousNumber++;
-                    break;
-            }
-        }
+    public void endDay(){
+        this.newDayInf = true;
+        this.newDayIso = true;
     }
     
     public void showStatistics(){
@@ -53,7 +38,31 @@ public class Statistics {
         this.input.getIntegerNumber("Opção");
     }
     
-     private void printMenu(String title,String[] options){
+    public void addInfection(){
+        if (this.newDayInf) this.infectionsToday = 0;this.newDayInf = false;
+        this.infectedNumber++;
+        this.infectionsToday++;
+        this.continuousNumber = (this.database.getNumberOfRegistredUsers() + 1) - (this.infectedNumber + this.isolationNumber);
+    }
+    
+    public void addIsolation(){
+        if (this.newDayIso) this.isolationsToday = 0;this.newDayIso = false;
+        this.isolationNumber++;
+        this.isolationsToday++;
+        this.continuousNumber = (this.database.getNumberOfRegistredUsers() + 1) - (this.infectedNumber + this.isolationNumber);
+        
+    }
+    
+    public void zeroOutDaily(){
+        this.isolationsToday = 0;
+        this.infectionsToday = 0;
+        this.newDayIso = false;
+        this.newDayInf = false;
+        this.continuousNumber = (this.database.getNumberOfRegistredUsers() + 1) - (this.infectedNumber + this.isolationNumber);
+    }
+    
+    
+    private void printMenu(String title,String[] options){
         System.out.print('+');
         for (int a = 0; a < title.length() + 10;a++){
             System.out.print('-');

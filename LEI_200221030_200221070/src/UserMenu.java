@@ -117,9 +117,7 @@ public class UserMenu {
         switch (response){
             case 2:
                 //TODO 
-                this.userObject.setStatus(UserState.INFECTED);
-                this.database.updateUser(userObject, userObject.getIndividualID());
-                
+                this.healthOrganization.addOnListOfInfecteds(userObject.getGeneraredIDs());
                 options = new String[]{};
                 titles = new String[]{"Defenido como infectado"};
                 printMenu(titles,options);

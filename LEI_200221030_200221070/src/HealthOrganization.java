@@ -1,5 +1,6 @@
 import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.HashSet;
 
 /**
  * Class da organização de saúde
@@ -9,10 +10,12 @@ public class HealthOrganization {
 
     private String[] listOfCodesOfInfecteds;
     private Database baseDeDados;
-
-    public HealthOrganization(Database basededados) {
+    private Statistics stats;
+    
+    public HealthOrganization(Database basededados, Statistics stats) {
         this.listOfCodesOfInfecteds =  new String[0];
         this.baseDeDados = basededados;
+        this.stats = stats;
     }
 
     /**
@@ -35,7 +38,8 @@ public class HealthOrganization {
                     /**APAGAR */
                     userBuffer.setStatus(UserState.ISOLATION);
                     userBuffer.setDateOfChangedStatus();
-
+                    this.baseDeDados.updateUser(userBuffer,userBuffer.getIndividualID());
+                    this.stats.addIsolation();
                     twoWayBuffer = Arrays.copyOf(twoWayBuffer, twoWayBuffer.length + 1);
                     twoWayBuffer[twoWayBuffer.length - 1] = userBuffer;
                     /**APAGAR */
@@ -48,6 +52,7 @@ public class HealthOrganization {
     }
 
     public void checkUsersContacts() {
+        if (this.listOfCodesOfInfecteds.length == 0) {this.stats.zeroOutDaily();return;}
         User twoWayBuffer = null;
         String[] contacts;
         for (String buffer : this.listOfCodesOfInfecteds){
@@ -55,18 +60,34 @@ public class HealthOrganization {
                 User userBuffer = this.baseDeDados.getUser(buffer);
                 if (userBuffer == null) continue;
                 getContactsOfInfectedUser(userBuffer.getRecivedIDs());
-
                 twoWayBuffer = userBuffer;
             }else{
                 if (twoWayBuffer.equals(this.baseDeDados.getUser(buffer))) continue;
                 User userBuffer = this.baseDeDados.getUser(buffer);
                 if (userBuffer == null) continue;
                 for (String userBufferContact : userBuffer.getRecivedIDs()){
-                    
+                getContactsOfInfectedUser(userBuffer.getRecivedIDs());
                 }
                 twoWayBuffer = userBuffer;
             }
         }
+    }
+    
+    public void sendInfectedToDb(){
+        if (this.listOfCodesOfInfecteds.length == 0){ this.stats.zeroOutDaily();return;}
+        User[] array = new User[0];
+        for (String buffer : this.listOfCodesOfInfecteds){
+            User userBuffer = this.baseDeDados.getUser(buffer);
+            if (!Arrays.stream(array).anyMatch(userBuffer::equals)){
+                array = Arrays.copyOf(array, array.length + 1);
+                array[array.length - 1] = userBuffer;
+                userBuffer.setStatus(UserState.INFECTED);
+                userBuffer.setDateOfChangedStatus();
+                this.baseDeDados.updateUser(userBuffer, userBuffer.getIndividualID());
+                this.stats.addInfection();
+            }
+        }
+        this.listOfCodesOfInfecteds = new String[0];
     }
 
     /**

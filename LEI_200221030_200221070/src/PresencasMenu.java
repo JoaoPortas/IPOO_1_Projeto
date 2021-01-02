@@ -227,6 +227,7 @@ public class PresencasMenu {
     
     
     private void terminarAula(){
+
         for (User buffer : this.usersInClass){
             if (buffer == null) continue;
             buffer.addGenerateID();

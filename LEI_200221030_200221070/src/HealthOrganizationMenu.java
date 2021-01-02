@@ -72,7 +72,12 @@ public class HealthOrganizationMenu {
             case 1:
                 //TODO enviar generatedIds para lá
                 //TODO atualizar estatisticas
+                this.healthOrganization.checkUsersContacts();
+                this.healthOrganization.sendInfectedToDb();
+                this.stats.endDay();
+                
                 /*Apagar*/
+                /*
                 HealthOrganization ho1 = new HealthOrganization(database);
                 for (User temp : database.getAllUsers()) {
                     if (temp != null) {
@@ -82,7 +87,7 @@ public class HealthOrganizationMenu {
                         }
                     }
                     
-                    /**/
+                    
                 }
 
                 ho1.checkUsersContacts();
@@ -90,8 +95,8 @@ public class HealthOrganizationMenu {
                 //ho1.addOnListOfInfecteds();
                 for (String temp : ho1.getListOfCodesOfInfdStrings()) {
                     System.out.println(temp);
-                }*/
-                /***** */
+                } */
+                menuHandler();
                 break;
             case 2:
                 this.stats.showStatistics();

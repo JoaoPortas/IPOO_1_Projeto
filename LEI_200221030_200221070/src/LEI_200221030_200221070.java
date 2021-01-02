@@ -33,7 +33,7 @@ public class LEI_200221030_200221070 {
         LEI_200221030_200221070 mainClass = new LEI_200221030_200221070();
         mainClass.basededados  = new Database();
         mainClass.stats = new Statistics(mainClass.basededados);
-        mainClass.healthOrganization = new HealthOrganization(mainClass.basededados);
+        mainClass.healthOrganization = new HealthOrganization(mainClass.basededados,mainClass.stats);
         mainClass.mainMenu = new MainMenu(mainClass,mainClass.basededados);
         mainClass.presencasMenu = new PresencasMenu(mainClass,mainClass.basededados);
         mainClass.userMenu = new UserMenu(mainClass,mainClass.basededados,mainClass.healthOrganization,mainClass.stats);
@@ -74,8 +74,6 @@ public class LEI_200221030_200221070 {
         this.basededados.registerUser(new User(200221036,UserState.CONTINUOUS,Cargos.Aluno));
         this.basededados.registerUser(new User(111111111,UserState.CONTINUOUS,Cargos.Professor));
         this.basededados.registerUser(new User(222222222,UserState.CONTINUOUS,Cargos.Professor));
-        this.basededados.registerUser(new User(333333333,UserState.INFECTED,Cargos.Professor));
-        this.stats.updateStatistics();
         this.mainMenu.enableMenu();
         
         
@@ -107,7 +105,6 @@ public class LEI_200221030_200221070 {
         this.basededados.registerUser(new User(111111111,UserState.CONTINUOUS,Cargos.Professor));
         this.basededados.registerUser(new User(222222222,UserState.INFECTED,Cargos.Professor));
         this.basededados.registerUser(new User(333333333,UserState.INFECTED,Cargos.Professor));
-        this.stats.updateStatistics();
         //this.healthOrganization
 
         //this.healthOrganization.addOnListOfInfecteds(this.basededados.getUser(333333333).getRecivedIDs());
