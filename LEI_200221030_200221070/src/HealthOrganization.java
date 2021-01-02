@@ -120,17 +120,17 @@ public class HealthOrganization {
         }*/
     }
 
-    public String recomendations(UserState state) {
+    public String[] recomendations(UserState state) {
         if (state != null) {
             switch (state) {
                 case CONTINUOUS:
-                    return "";
+                    return new String[]{"Utilizar máscara quando em contacto com outras pessoas.", "Manter a distâcia social de 2 metros."};
                 case ISOLATION:
-                    return "";
+                    return new String[]{"Não sair de casa.", "Evitar contactos com os presentes.", "Ligar para o SNS em caso de sintomas."};
                 case INFECTED:
-                    return "";
+                    return new String[]{"Permanecer separado de outras pessoas em uma divisória bem ventilada.", "Só sair da divisória em isolamento no caso de extrema necessidade.", "Evitar a partilha de objetos com parentes ou outras pessoas presentes."};
             }
         }
-        return "Sem recomendações.";
+        return new String[]{"Sem indicações."};
     }
 }
