@@ -120,17 +120,17 @@ public class HealthOrganization {
         }*/
     }
 
-    public void fun() {
-        System.out.println("fun()");
-
-            System.out.println(this.baseDeDados.getAllUsers().length);
-            for (User cache : this.baseDeDados.getAllUsers()) {
-                if (cache != null) {
-                    if (cache.getStatus() == UserState.INFECTED) {
-                        System.out.println("HealthOrganization.fun()");
-                    }
-                }    
+    public String recomendations(UserState state) {
+        if (state != null) {
+            switch (state) {
+                case CONTINUOUS:
+                    return "";
+                case ISOLATION:
+                    return "";
+                case INFECTED:
+                    return "";
             }
-
+        }
+        return "Sem recomendações.";
     }
 }
