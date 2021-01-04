@@ -42,15 +42,27 @@ public class Statistics {
         if (this.newDayInf) this.infectionsToday = 0;this.newDayInf = false;
         this.infectedNumber++;
         this.infectionsToday++;
-        this.continuousNumber = (this.database.getNumberOfRegistredUsers() + 1) - (this.infectedNumber + this.isolationNumber);
+        this.continuousNumber = (this.database.getNumberOfRegistredUsers()) - (this.infectedNumber + this.isolationNumber);
     }
     
     public void addIsolation(){
         if (this.newDayIso) this.isolationsToday = 0;this.newDayIso = false;
         this.isolationNumber++;
         this.isolationsToday++;
-        this.continuousNumber = (this.database.getNumberOfRegistredUsers() + 1) - (this.infectedNumber + this.isolationNumber);
+        this.continuousNumber = (this.database.getNumberOfRegistredUsers()) - (this.infectedNumber + this.isolationNumber);
         
+    }
+    
+    public void removeIsolation(){
+        this.isolationNumber--;
+        if (this.isolationsToday > 0) this.isolationsToday--;
+        this.continuousNumber = (this.database.getNumberOfRegistredUsers()) - (this.infectedNumber + this.isolationNumber) ;
+    }
+    
+    public void removeInfection(){
+        this.infectedNumber--;
+        if (this.infectionsToday > 0) this.infectionsToday--;
+        this.continuousNumber = (this.database.getNumberOfRegistredUsers()) - (this.infectedNumber + this.isolationNumber);
     }
     
     public void zeroOutDaily(){
@@ -58,7 +70,7 @@ public class Statistics {
         this.infectionsToday = 0;
         this.newDayIso = false;
         this.newDayInf = false;
-        this.continuousNumber = (this.database.getNumberOfRegistredUsers() + 1) - (this.infectedNumber + this.isolationNumber);
+        this.continuousNumber = (this.database.getNumberOfRegistredUsers()) - (this.infectedNumber + this.isolationNumber);
     }
     
     

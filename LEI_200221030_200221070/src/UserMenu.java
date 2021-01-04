@@ -132,6 +132,28 @@ public class UserMenu {
                 this.inputReader.nextLine();
                 menuHandler();
                 break;
+            case 3:
+                this.userObject.setStatus(UserState.ISOLATION);
+                this.database.updateUser(this.userObject, this.userId);
+                this.stats.addIsolation();
+                options = new String[]{};
+                titles = new String[]{"Entrou em isolado"};
+                printMenu(titles,options);
+                System.out.println("Prima 'enter' para continuar");
+                this.inputReader.nextLine();
+                menuHandler();
+                break;
+            case 4:
+                this.userObject.setStatus(UserState.CONTINUOUS);
+                this.database.updateUser(this.userObject, this.userId);
+                this.stats.removeIsolation();
+                options = new String[]{};
+                titles = new String[]{"Saiu do isolamento"};
+                printMenu(titles,options);
+                System.out.println("Prima 'enter' para continuar");
+                this.inputReader.nextLine();
+                menuHandler();
+                break;
             case 5:
                 this.stats.showStatistics();
                 menuHandler();
