@@ -43,14 +43,7 @@ public class LEI_200221030_200221070 {
         mainClass.healthOrganizationMenu = new HealthOrganizationMenu(mainClass,mainClass.basededados,mainClass.stats,mainClass.healthOrganization);
         mainClass.administrationMenu = new AdministrationMenu(mainClass,mainClass.basededados);
         
-        
-        InputReader reader = new InputReader();
-        int what = reader.getIntegerNumber("Quem");
-        if (what == 1){
-            mainClass.joao();
-        }else{
-            mainClass.idkeyz();
-        }
+        mainClass.joao();
     }
 
     public void joao(){
@@ -61,7 +54,6 @@ public class LEI_200221030_200221070 {
         Classroom classroom3 = new Classroom(5,5,this.basededados,"F253");
         Classroom classroom4 = new Classroom(6,6,this.basededados,"F254");
         Classroom classroom5 = new Classroom(7,7,this.basededados,"F256");
-        classroom.drawMap();
         
         this.basededados.registerClassroom(classroom);
         this.basededados.registerClassroom(classroom2);
