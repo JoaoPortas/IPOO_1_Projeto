@@ -8,13 +8,13 @@ public class PresencasMenu {
     
     private InputReader inputReader;
     private boolean isActive = false;
-    private LEI_200221030_200221070 mainActivity;
+    private AppStart mainActivity;
     private int currentlyAvailableOptions;
     private Database database;
     private User[] usersInClass;
     int userId = -1;
 
-    public PresencasMenu(LEI_200221030_200221070 mainActivity,Database basededados){
+    public PresencasMenu(AppStart mainActivity,Database basededados){
         if (this.isActive == false){
             if (this.mainActivity == null){
                 this.mainActivity = mainActivity;

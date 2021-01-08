@@ -6,12 +6,12 @@ public class AdministrationMenu {
     
     private InputReader inputReader;
     private boolean isActive = false;
-    private LEI_200221030_200221070 mainActivity;
+    private AppStart mainActivity;
     private int currentlyAvailableOptions;
     private Database database;
     
     
-    public AdministrationMenu(LEI_200221030_200221070 mainActivity,Database database){
+    public AdministrationMenu(AppStart mainActivity,Database database){
         if (this.isActive == false){
             if (this.mainActivity == null){
                 this.mainActivity = mainActivity;

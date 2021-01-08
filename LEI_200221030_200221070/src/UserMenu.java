@@ -2,7 +2,7 @@ public class UserMenu {
     
     private InputReader inputReader;
     private boolean isActive = false;
-    private LEI_200221030_200221070 mainActivity;
+    private AppStart mainActivity;
     private int currentlyAvailableOptions;
     private User userObject;
     private Database database;
@@ -10,7 +10,7 @@ public class UserMenu {
     private Statistics stats;
     private HealthOrganization healthOrganization;
     
-    public UserMenu(LEI_200221030_200221070 mainActivity,Database database,HealthOrganization healthOrganization,Statistics stats){
+    public UserMenu(AppStart mainActivity,Database database,HealthOrganization healthOrganization,Statistics stats){
         if (this.isActive == false){
             if (this.mainActivity == null){
                 this.mainActivity = mainActivity;

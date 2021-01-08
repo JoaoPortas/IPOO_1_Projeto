@@ -11,7 +11,7 @@ import java.util.HashSet;
  *
  * @author João Gouveia e João Portas
  */
-public class LEI_200221030_200221070 {
+public class AppStart {
 
     /**
      * @param args the command line arguments
@@ -33,7 +33,7 @@ public class LEI_200221030_200221070 {
     public static void main(String[] args) {
 
         
-        LEI_200221030_200221070 mainClass = new LEI_200221030_200221070();
+        AppStart mainClass = new AppStart();
         mainClass.basededados  = new Database();
         mainClass.stats = new Statistics(mainClass.basededados);
         mainClass.healthOrganization = new HealthOrganization(mainClass.basededados,mainClass.stats);

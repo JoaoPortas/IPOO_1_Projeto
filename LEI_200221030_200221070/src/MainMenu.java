@@ -6,10 +6,10 @@ public class MainMenu {
     
     private InputReader inputReader;
     private boolean isActive = false;//?
-    private LEI_200221030_200221070 mainActivity;
+    private AppStart mainActivity;
     private Database database;
     
-    public MainMenu(LEI_200221030_200221070 mainActivity,Database database){
+    public MainMenu(AppStart mainActivity,Database database){
         if (this.isActive == false){
             if (this.mainActivity == null){
                 this.mainActivity = mainActivity;
