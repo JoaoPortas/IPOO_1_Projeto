@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 
+import java.util.Arrays;
+
 /**
  *
  * @author Joao2
@@ -18,15 +20,16 @@ public class Classroom {
     private Database db;
     private String classroomUUID;
     private String classroomName;
+    private int registredUsers;
     
-    
-    public Classroom(int colunas,int linhas,Database database,String classroomName){
+    public Classroom(int colunas, int linhas, Database database, String classroomName){
         this.colunas = (colunas > 1)? colunas : 1;
         this.linhas = (linhas > 1)? linhas : 1;
         this.db = database;
         this.mapa = new User[this.colunas * this.linhas];
         this.classroomUUID = RandomCodeGenerator.generateUniqueCode();
         this.classroomName = classroomName;
+        this.registredUsers = 0;
     }
     
     public String getUUID(){
@@ -37,10 +40,101 @@ public class Classroom {
         return this.classroomName;
     }
     
-    public void addUserToClass(){
-        //TODO
+    public void addUserToClass(User userToRegister){
+        if (this.registredUsers == this.mapa.length) return;
+        for (User buffer : this.mapa){
+            if (buffer == null) continue;
+            if (buffer.getIndividualID() == userToRegister.getIndividualID()) return;
+        }
+        this.mapa[registredUsers] = userToRegister;
+        this.registredUsers++;
     }
-    
+
+    private int getIndexOnArray(User search){
+        int c = 0;
+        for (User buffer : this.mapa){
+            if (buffer.getIndividualID() == search.getIndividualID()) return c;
+            c++;
+        }
+        return -1;
+    }
+
+    private int[] getCoords(int index){
+        int y = (int)(index / this.colunas);
+        int x = (index-(y*this.colunas));
+        return new int[]{x,y};
+    }
+
+    public String[] getContacts(User student,int distance){
+        int disX = 0;
+        int disY = distance;
+        int userPos = getIndexOnArray(student);
+        int[] coords = getCoords(userPos);
+        String[] contacts = new String[0];
+        int dirY = 1;
+        int dirX = 0;
+        //Vertical Checks
+        contacts = grow(contacts);
+        int index = ((coords[1] + (disY/2) * dirY) * this.colunas + coords[0]);
+        User buffer = mapa[index];
+        contacts[contacts.length - 1] = buffer.getCurrentIDToCastString();
+        contacts = grow(contacts);
+
+        dirY = -1;
+        index = ((coords[1] + (disY/2) * dirY) * this.colunas + coords[0]);
+        buffer = mapa[index];
+        contacts[contacts.length - 1] = buffer.getCurrentIDToCastString();
+        contacts = grow(contacts);
+
+        dirY = 0;
+        disY = 0;
+        disX = distance;
+        dirX = 1;
+        index = (coords[1] * this.colunas + (coords[0] + ((disX/2)  * dirX)));
+        buffer = mapa[index];
+        contacts[contacts.length - 1] = buffer.getCurrentIDToCastString();
+        contacts = grow(contacts);
+        dirX = -1;
+        index = (coords[1] * this.colunas + (coords[0] + ((disX/2)  * dirX)));
+        buffer = mapa[index];
+        contacts[contacts.length - 1] = buffer.getCurrentIDToCastString();
+        //Diagnal Checks
+        if (distance == 4){
+            int finalDDir = distance/2;
+            //Upper Right Quarter
+            dirX = 1;
+            dirY = -1;
+            contacts = grow(contacts);
+            index = (coords[1] + ((finalDDir / 2) * dirY)) * 5 + (coords[0] + ((finalDDir / 2) * dirX));
+            buffer = mapa[index];
+            contacts[contacts.length - 1] = buffer.getCurrentIDToCastString();
+            contacts = grow(contacts);
+            dirX = 1;
+            dirY = 1;
+            index = (coords[1] + ((finalDDir / 2) * dirY)) * 5 + (coords[0] + ((finalDDir / 2) * dirX));
+            buffer = mapa[index];
+            contacts[contacts.length - 1] = buffer.getCurrentIDToCastString();
+            contacts = grow(contacts);
+            dirX = -1;
+            dirY = 1;
+            index = (coords[1] + ((finalDDir / 2) * dirY)) * 5 + (coords[0] + ((finalDDir / 2) * dirX));
+            buffer = mapa[index];
+            contacts[contacts.length - 1] = buffer.getCurrentIDToCastString();
+            contacts = grow(contacts);
+            dirX = -1;
+            dirY = -1;
+            index = (coords[1] + ((finalDDir / 2) * dirY)) * 5 + (coords[0] + ((finalDDir / 2) * dirX));
+            buffer = mapa[index];
+            contacts[contacts.length - 1] = buffer.getCurrentIDToCastString();
+        }
+
+        return contacts;
+    }
+
+    private String[] grow(String[] target){
+        return Arrays.copyOf(target,target.length + 1);
+    }
+
     public void updateCapacity(int linhas,int colunas){
         this.linhas = linhas;
         this.colunas = colunas;
@@ -67,16 +161,12 @@ public class Classroom {
                 if (this.mapa[(this.y * this.colunas) + this.x] == null){
                     System.out.print("Ninguem, ");
                 }else{
-                    System.out.print("Alguem, ");
+                    System.out.print(this.mapa[(this.y * this.colunas) + this.x].getCurrentIDToCastString() + ",");
                 }
             }
             System.out.println("");
         }
         System.out.println("]");
     }
-    
-    //TODO change return type?
-    public String[] getContacts(){
-        return null;
-    }
+
 }
