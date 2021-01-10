@@ -21,6 +21,7 @@ public class Classroom {
     private String classroomUUID;
     private String classroomName;
     private int registredUsers;
+    private String dateOfClass;
     
     public Classroom(int colunas, int linhas, Database database, String classroomName){
         this.colunas = (colunas > 1)? colunas : 1;
