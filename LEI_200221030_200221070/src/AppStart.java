@@ -47,7 +47,8 @@ public class AppStart {
     }
 
     public void joao(){
-        
+        test();
+        /*
         
         Classroom classroom = new Classroom(3,3,this.basededados,"F251");
         Classroom classroom2 = new Classroom(4,4,this.basededados,"F252");
@@ -69,12 +70,40 @@ public class AppStart {
         this.basededados.registerUser(new User(200221036,UserState.CONTINUOUS,Cargos.Aluno));
         this.basededados.registerUser(new User(111111111,UserState.CONTINUOUS,Cargos.Professor));
         this.basededados.registerUser(new User(222222222,UserState.CONTINUOUS,Cargos.Professor));
-        this.mainMenu.enableMenu();
+        this.mainMenu.enableMenu();*/
         
         
     }
 
 
+     public void test(){
+        Classroom test = new Classroom(5,5,this.basededados,"TestRoom");
+        test.drawMap();
+        User[] testUsers = new User[25];
+        for (int a = 0; a < 25;a++){
+            User buffer = new User(200221030 + a,UserState.CONTINUOUS,Cargos.Aluno);
+            testUsers[a] = buffer;
+        }
+        for (User buffer2 : testUsers){
+            buffer2.addGenerateID();
+            test.addUserToClass(buffer2);
+        }
+        test.drawMap();
+
+
+        String[] twoMeterContacts = test.getContacts(testUsers[12], 2);
+        System.out.println("Contacts from (2 meters) : " + testUsers[12].getCurrentIDToCastString());
+        for (String buffer : twoMeterContacts){
+            System.out.println("Contact : " + buffer);
+        }
+
+        String[] fourMeterContacts = test.getContacts(testUsers[12], 4);
+        System.out.println("Contacts from (4 meters) : " + testUsers[12].getCurrentIDToCastString());
+        for (String buffer : fourMeterContacts){
+            System.out.println("Contact : " + buffer);
+        }
+    }
+    
     
     public void idkeyz() {
 
