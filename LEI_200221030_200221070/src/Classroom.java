@@ -74,65 +74,96 @@ public class Classroom {
         int dirY = 1;
         int dirX = 0;
         //Vertical Checks
-        contacts = grow(contacts);
-        int index = ((coords[1] + (disY/2) * dirY) * this.colunas + coords[0]);
-        User buffer = mapa[index];
-        contacts[contacts.length - 1] = buffer.getCurrentIDToCastString();
-        contacts = grow(contacts);
-
+        int index;
+        User buffer;
+        if ((coords[1] + (disY/2) * dirY) > -1 && (coords[1] + (disY/2) * dirY) < this.linhas) {
+            contacts = grow(contacts);
+            index = ((coords[1] + (disY/2) * dirY) * this.colunas + coords[0]);
+            buffer = mapa[index];
+            contacts[contacts.length - 1] = buffer.getCurrentIDToCastString();
+            contacts = grow(contacts);
+        }
+        
+        
         dirY = -1;
-        index = ((coords[1] + (disY/2) * dirY) * this.colunas + coords[0]);
-        buffer = mapa[index];
-        contacts[contacts.length - 1] = buffer.getCurrentIDToCastString();
-        contacts = grow(contacts);
-
+            if ((coords[1] + (disY/2) * dirY) > -1  && (coords[1] + (disY/2) * dirY) < this.linhas) {
+            index = ((coords[1] + (disY/2) * dirY) * this.colunas + coords[0]);
+            buffer = mapa[index];
+            contacts[contacts.length - 1] = buffer.getCurrentIDToCastString();
+            contacts = grow(contacts);
+        }
         dirY = 0;
         disY = 0;
         disX = distance;
         dirX = 1;
-        index = (coords[1] * this.colunas + (coords[0] + ((disX/2)  * dirX)));
-        buffer = mapa[index];
-        contacts[contacts.length - 1] = buffer.getCurrentIDToCastString();
-        contacts = grow(contacts);
+        
+        if ((coords[0] + ((disX/2)  * dirX)) > -1 && (coords[0] + ((disX/2)  * dirX)) < this.colunas){
+            index = (coords[1] * this.colunas + (coords[0] + ((disX/2)  * dirX)));
+            buffer = mapa[index];
+            contacts[contacts.length - 1] = buffer.getCurrentIDToCastString();
+            contacts = grow(contacts);
+        }
+        
+        
         dirX = -1;
-        index = (coords[1] * this.colunas + (coords[0] + ((disX/2)  * dirX)));
-        buffer = mapa[index];
-        contacts[contacts.length - 1] = buffer.getCurrentIDToCastString();
+                
+        if ((coords[0] + ((disX/2)  * dirX)) > -1 && (coords[0] + ((disX/2)  * dirX)) < this.colunas){
+            index = (coords[1] * this.colunas + (coords[0] + ((disX/2)  * dirX)));
+            buffer = mapa[index];
+            contacts[contacts.length - 1] = buffer.getCurrentIDToCastString();
+            contacts = grow(contacts);
+        }
         //Diagnal Checks
         if (distance == 4){
             int finalDDir = distance/2;
             //Upper Right Quarter
             dirX = 1;
             dirY = -1;
-            contacts = grow(contacts);
-            index = (coords[1] + ((finalDDir / 2) * dirY)) * 5 + (coords[0] + ((finalDDir / 2) * dirX));
-            buffer = mapa[index];
-            contacts[contacts.length - 1] = buffer.getCurrentIDToCastString();
-            contacts = grow(contacts);
+            if ((coords[1] + ((finalDDir / 2) * dirY)) > -1 && (coords[1] + ((finalDDir / 2) * dirY)) < this.linhas && (coords[0] + ((finalDDir / 2) * dirX)) > -1 && (coords[0] + ((finalDDir / 2) * dirX)) < this.colunas){
+               
+                index = (coords[1] + ((finalDDir / 2) * dirY)) * this.colunas + (coords[0] + ((finalDDir / 2) * dirX));
+                buffer = mapa[index];
+                contacts[contacts.length - 1] = buffer.getCurrentIDToCastString();
+                contacts = grow(contacts);
+            }
             dirX = 1;
             dirY = 1;
-            index = (coords[1] + ((finalDDir / 2) * dirY)) * 5 + (coords[0] + ((finalDDir / 2) * dirX));
-            buffer = mapa[index];
-            contacts[contacts.length - 1] = buffer.getCurrentIDToCastString();
-            contacts = grow(contacts);
+            if ((coords[1] + ((finalDDir / 2) * dirY)) > -1 && (coords[1] + ((finalDDir / 2) * dirY)) < this.linhas && (coords[0] + ((finalDDir / 2) * dirX)) > -1 && (coords[0] + ((finalDDir / 2) * dirX)) < this.colunas){
+                index = (coords[1] + ((finalDDir / 2) * dirY)) * this.colunas + (coords[0] + ((finalDDir / 2) * dirX));
+                buffer = mapa[index];
+                contacts[contacts.length - 1] = buffer.getCurrentIDToCastString();
+                contacts = grow(contacts);
+            }
             dirX = -1;
             dirY = 1;
-            index = (coords[1] + ((finalDDir / 2) * dirY)) * 5 + (coords[0] + ((finalDDir / 2) * dirX));
-            buffer = mapa[index];
-            contacts[contacts.length - 1] = buffer.getCurrentIDToCastString();
-            contacts = grow(contacts);
+            if ((coords[1] + ((finalDDir / 2) * dirY)) > -1 && (coords[1] + ((finalDDir / 2) * dirY)) < this.linhas && (coords[0] + ((finalDDir / 2) * dirX)) > -1 && (coords[0] + ((finalDDir / 2) * dirX)) < this.colunas){
+                index = (coords[1] + ((finalDDir / 2) * dirY)) * this.colunas + (coords[0] + ((finalDDir / 2) * dirX));
+                buffer = mapa[index];
+                contacts[contacts.length - 1] = buffer.getCurrentIDToCastString();
+                contacts = grow(contacts);
+            }
             dirX = -1;
             dirY = -1;
-            index = (coords[1] + ((finalDDir / 2) * dirY)) * 5 + (coords[0] + ((finalDDir / 2) * dirX));
-            buffer = mapa[index];
-            contacts[contacts.length - 1] = buffer.getCurrentIDToCastString();
+            if ((coords[1] + ((finalDDir / 2) * dirY)) > -1 && (coords[1] + ((finalDDir / 2) * dirY)) < this.linhas && (coords[0] + ((finalDDir / 2) * dirX)) > -1 && (coords[0] + ((finalDDir / 2) * dirX)) < this.colunas){
+                index = (coords[1] + ((finalDDir / 2) * dirY)) * this.colunas + (coords[0] + ((finalDDir / 2) * dirX));
+                buffer = mapa[index];
+                contacts[contacts.length - 1] = buffer.getCurrentIDToCastString();
+            }
         }
-
+        if (contacts[contacts.length - 1] == null){
+            contacts = removeSpaceFromArray(contacts);
+        }
+        
         return contacts;
     }
 
+    
     private String[] grow(String[] target){
         return Arrays.copyOf(target,target.length + 1);
+    }
+    
+    private String[] removeSpaceFromArray(String[] target){
+        return Arrays.copyOf(target,target.length - 1);
     }
 
     public void updateCapacity(int linhas,int colunas){

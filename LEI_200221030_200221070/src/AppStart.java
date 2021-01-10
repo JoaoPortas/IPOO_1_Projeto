@@ -91,14 +91,14 @@ public class AppStart {
         test.drawMap();
 
 
-        String[] twoMeterContacts = test.getContacts(testUsers[12], 2);
-        System.out.println("Contacts from (2 meters) : " + testUsers[12].getCurrentIDToCastString());
+        String[] twoMeterContacts = test.getContacts(testUsers[4], 2);
+        System.out.println("Contacts from (2 meters) : " + testUsers[4].getCurrentIDToCastString());
         for (String buffer : twoMeterContacts){
             System.out.println("Contact : " + buffer);
         }
 
-        String[] fourMeterContacts = test.getContacts(testUsers[12], 4);
-        System.out.println("Contacts from (4 meters) : " + testUsers[12].getCurrentIDToCastString());
+        String[] fourMeterContacts = test.getContacts(testUsers[4], 4);
+        System.out.println("Contacts from (4 meters) : " + testUsers[4].getCurrentIDToCastString());
         for (String buffer : fourMeterContacts){
             System.out.println("Contact : " + buffer);
         }
