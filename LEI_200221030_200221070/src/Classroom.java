@@ -77,22 +77,21 @@ public class Classroom {
 
 
     public String[] getContacts(User student,int distance){
-        int disX = 0;
         int userPos = getIndexOnArray(student);
-        int[] coords = getCoords(userPos);
+        int[] cords = getCoords(userPos);
         String[] contacts = new String[0];
         int dirY = 1;
         int dirX = 0;
         int index;
         User buffer;
-        index = getIndexAtDistance(distance,dirX,dirY,coords);
+        index = getIndexAtDistance(distance,dirX,dirY,cords);
         if (index != -1){
             contacts = grow(contacts);
             buffer = this.classroomUsers.get(index);
             contacts[contacts.length - 1] = buffer.getCurrentIDToCastString();
         }
         dirY = -1;
-        index = getIndexAtDistance(distance,dirX,dirY,coords);
+        index = getIndexAtDistance(distance,dirX,dirY,cords);
         if (index != -1){
             contacts = grow(contacts);
             buffer = this.classroomUsers.get(index);
@@ -100,14 +99,14 @@ public class Classroom {
         }
         dirX = 1;
         dirY = 0;
-        index = getIndexAtDistance(distance,dirX,dirY,coords);
+        index = getIndexAtDistance(distance,dirX,dirY,cords);
         if (index != -1){
             contacts = grow(contacts);
             buffer = this.classroomUsers.get(index);
             contacts[contacts.length - 1] = buffer.getCurrentIDToCastString();
         }
         dirX = -1;
-        index = getIndexAtDistance(distance,dirX,dirY,coords);
+        index = getIndexAtDistance(distance,dirX,dirY,cords);
         if (index != -1){
             contacts = grow(contacts);
             buffer = this.classroomUsers.get(index);
@@ -119,28 +118,28 @@ public class Classroom {
             //Upper Right Quarter
             dirX = 1;
             dirY = -1;
-            index = getIndexAtDistance(distance,dirX,dirY,coords);
+            index = getIndexAtDistance(distance,dirX,dirY,cords);
             if (index != -1){
                 contacts = grow(contacts);
                 buffer = this.classroomUsers.get(index);
                 contacts[contacts.length - 1] = buffer.getCurrentIDToCastString();
             }
             dirY = 1;
-            index = getIndexAtDistance(distance,dirX,dirY,coords);
+            index = getIndexAtDistance(distance,dirX,dirY,cords);
             if (index != -1){
                 contacts = grow(contacts);
                 buffer = this.classroomUsers.get(index);
                 contacts[contacts.length - 1] = buffer.getCurrentIDToCastString();
             }
             dirX = -1;
-            index = getIndexAtDistance(distance,dirX,dirY,coords);
+            index = getIndexAtDistance(distance,dirX,dirY,cords);
             if (index != -1){
                 contacts = grow(contacts);
                 buffer = this.classroomUsers.get(index);
                 contacts[contacts.length - 1] = buffer.getCurrentIDToCastString();
             }
             dirY = 1;
-            index = getIndexAtDistance(distance,dirX,dirY,coords);
+            index = getIndexAtDistance(distance,dirX,dirY,cords);
             if (index != -1){
                 contacts = grow(contacts);
                 buffer = this.classroomUsers.get(index);
