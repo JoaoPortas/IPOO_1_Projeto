@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -10,21 +11,17 @@ import java.util.Arrays;
  * @author Joao2
  */
 public class Database {
-    
-    private User[] userData = null;
-    private Classroom[] classroomData = null;
+
+    private ArrayList<User> userCollection;
+    private Classroom[] classroomData;
     private Classroom[] aulas = null;
     
     /**
      * Contrutor para a classe Database, esta não requere parametros
      */
     public Database(){
-        if (this.userData == null){
-            this.userData = new User[1];
-            this.classroomData = new Classroom[1];
-        }else{
-            return;
-        }
+        this.classroomData = new Classroom[1];
+        this.userCollection = new ArrayList<>(0);
     }
     //<editor-fold defaultstate="collapsed" desc="User Section">
     
@@ -34,24 +31,13 @@ public class Database {
      * @return Eetorna um código de erro do tipo enum ErrorCode
      */
     public ErrorCode registerUser(User userToRegister){
-        boolean duplicateFlag = false;
-        if (this.userData.length > 1){
-            for (User userBuffer : this.userData){
+        if (this.userCollection.size() > 1){
+            for (User userBuffer : this.userCollection){
                 if (userBuffer == null) continue;
-                if (duplicateFlag){
-                    continue;
-                }
-                if (userBuffer.getIndividualID() == userToRegister.getIndividualID()){
-                    duplicateFlag = true;
-                }
-            }
-            if (duplicateFlag){
-                return ErrorCode.UserAlreadyRegistred;
+                if (userBuffer.getIndividualID() == userToRegister.getIndividualID()) return ErrorCode.UserAlreadyRegistred;
             }
         }
-        User[] buffer = Arrays.copyOf(this.userData,this.userData.length + 1);
-        buffer[this.userData.length - 1] = userToRegister;
-        this.userData = Arrays.copyOf(buffer, buffer.length);
+        this.userCollection.add(userToRegister);
         return ErrorCode.NoError;
     }
     
@@ -61,7 +47,7 @@ public class Database {
      * @return Retorna um Objeto do tipo User
      */
     public User getUser(int individualID){
-        for (User userBuffer : this.userData){
+        for (User userBuffer : this.userCollection){
             if (userBuffer == null) continue;
             if (userBuffer.getIndividualID() == individualID){
                 return userBuffer;
@@ -71,8 +57,8 @@ public class Database {
     }
     
     
-    public User[] getAllUsers(){
-        return this.userData;
+    public ArrayList<User> getAllUsers(){
+        return this.userCollection;
     }
     
     /**
@@ -82,7 +68,7 @@ public class Database {
      * @return Retorna um Objeto do tipo User
      */
     public User getUser(String generatedID){
-        for (User userBuffer : this.userData){
+        for (User userBuffer : this.userCollection){
             if (userBuffer == null) continue;
             for (String idBuffer : userBuffer.getGeneraredIDs()){
                 if (idBuffer.equals(generatedID)){
@@ -101,22 +87,23 @@ public class Database {
      */
     public ErrorCode updateUser(User userObject,int id){
         if (getUserIndex(id) != -1){
-            this.userData[getUserIndex(id)] = userObject;
+            this.userCollection.set(getUserIndex(id),userObject);
             return ErrorCode.NoError;
         }
         else{
             return ErrorCode.UserNotFound;
         }
+
     }
     
     /**
      * Obtem um index no array da base de dados
-     * @param id id de 9 digitos do utilizador
+     * @param individualID id de 9 digitos do utilizador
      * @return Retorna o index do utilizador
      */
     private int getUserIndex(int individualID){
         int c = 0;
-        for (User userBuffer : this.userData){
+        for (User userBuffer : this.userCollection){
             if (userBuffer == null) continue;
             if (userBuffer.getIndividualID() == individualID){
                 return c;
@@ -125,7 +112,21 @@ public class Database {
         }
         return -1;
     }
-    
+
+    private int getUserIndex(String generatedId){
+        int c = 0;
+        for (User userBuffer : this.userCollection){
+            if (userBuffer == null) continue;
+            for (String stringBuffer : userBuffer.getGeneraredIDs()){
+                if (stringBuffer.equals(generatedId)){
+                    return c;
+                }
+            }
+            c++;
+        }
+        return -1;
+    }
+
     /**
      * Remove um utilizador da base de dados
      * @param individualId id de 9 digitos do utilizador
@@ -134,13 +135,7 @@ public class Database {
     public ErrorCode removeUserFromDB(int individualId){
         int index = getUserIndex(individualId);
         if (index != -1){
-            this.userData[index] = null;
-            for (int a = index + 1; a < this.userData.length;a++){
-                if (this.userData[a] == null) continue;
-                this.userData[a -1] = this.userData[a];
-            }
-            User[] buffer = Arrays.copyOf(this.userData,this.userData.length - 2);
-            this.userData = Arrays.copyOf(buffer, buffer.length);
+            this.userCollection.remove(getUserIndex(individualId));
         }
         else{
             return ErrorCode.UserNotFound;
@@ -158,13 +153,7 @@ public class Database {
         User user = this.getUser(generatedId);
         int index = getUserIndex(user.getIndividualID());
         if (index != -1){
-            this.userData[index] = null;
-            for (int a = index + 1; a < this.userData.length;a++){
-                if (this.userData[a] == null) continue;
-                this.userData[a -1] = this.userData[a];
-            }
-            User[] buffer = Arrays.copyOf(this.userData,this.userData.length - 1);
-            this.userData = Arrays.copyOf(buffer, buffer.length);
+            this.userCollection.remove(getUserIndex(generatedId));
         }
         else{
             return ErrorCode.UserNotFound;
@@ -177,7 +166,7 @@ public class Database {
      * @return Retorna o numero de utilizadores na base de dados
      */
     public int getNumberOfRegistredUsers(){
-        return this.userData.length - 1;
+        return this.userCollection.size();
     }
     
 //</editor-fold>
@@ -194,7 +183,7 @@ public class Database {
                     return ErrorCode.ClassroomAlreadyRegistred;
                 }
                 
-                if (buffer.getUUID() == newClassroomToRegister.getUUID()){
+                if (buffer.getUUID().equals(newClassroomToRegister.getUUID())){
                     duplicateFlag = true;
                 }
             }
@@ -233,7 +222,7 @@ public class Database {
         if (searchByUUID){
             for (Classroom buffer : this.classroomData){
                 if (buffer == null) continue;
-                if (buffer.getUUID() == classroomNameOrUUID){
+                if (buffer.getUUID().equals(classroomNameOrUUID)){
                     return buffer;
                 }
             }
@@ -241,7 +230,7 @@ public class Database {
         }else{
             for (Classroom buffer : this.classroomData){
                 if (buffer == null) continue;
-                if (buffer.getName() == classroomNameOrUUID){
+                if (buffer.getName().equals(classroomNameOrUUID)){
                     return buffer;
                 }
             }

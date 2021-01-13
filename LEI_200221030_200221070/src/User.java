@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.time.LocalDate;
 import java.time.format.*;
@@ -22,13 +23,18 @@ public class User {
     private String currentIDToCast;
     private Cargos cargo;
     private String dateOfChangedStatus;
+    private ArrayList<String> generatedIds;
+    private ArrayList<String> recivedIds;
+
+
+
     /**
      * 
      * @param individualID ID do individuo com 9 digitos (número de aluno ou número mecanográfico para docentes)
      * @param status Estado do individuo (continuo, isolamento ou infetado)
      */
     public User(int individualID, UserState status,Cargos cargo) {
-        if (individualID == (int)individualID && status != null && String.valueOf(individualID).length() == 9) {
+        if (status != null && String.valueOf(individualID).length() == 9) {
             this.individualID = individualID;
             this.status = status;
             this.dateOfChangedStatus = (LocalDate.now()).format(DateTimeFormatter.ofPattern("dd/MM/uuuu"));
@@ -111,7 +117,7 @@ public class User {
      * @param individualID Recebe o número do inidividuo (numero de aluno ou mecanográfico para docentes) de 9 digitos
      */
     public void setIndividualID(int individualID) {
-        if (individualID == (int)individualID && String.valueOf(individualID).length() == 9) {
+        if (String.valueOf(individualID).length() == 9) {
             this.individualID = individualID;
         }
     }
@@ -244,7 +250,6 @@ public class User {
         LocalDate nowDate = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu");
         String formatedDate = nowDate.format(formatter);
-        formatedDate = nowDate.format(formatter);
         
         String[] buffer = Arrays.copyOf(this.recivedIDs, this.recivedIDs.length + 1);
         buffer[this.recivedIDs.length] = id + " - " + formatedDate;

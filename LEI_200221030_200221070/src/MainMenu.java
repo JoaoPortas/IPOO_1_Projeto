@@ -10,13 +10,9 @@ public class MainMenu {
     private Database database;
     
     public MainMenu(AppStart mainActivity,Database database){
-        if (this.isActive == false){
-            if (this.mainActivity == null){
-                this.mainActivity = mainActivity;
-                this.inputReader = new InputReader();
-                this.database = database;
-            }
-        }
+        this.mainActivity = mainActivity;
+        this.inputReader = new InputReader();
+        this.database = database;
     }
 
     public void enableMenu(){
@@ -69,43 +65,7 @@ public class MainMenu {
         }
         else if (response == 5){
             disableMenu();
-        }else if (response == 6){
-            String status = "";
-            System.out.println("----------------Database Print:-------------------");
-            for (User buffer : database.getAllUsers()){
-                if (buffer == null) continue;
-                System.out.println("Id: " + buffer.getIndividualID());
-                
-                switch (buffer.getStatus()){
-                    case CONTINUOUS:
-                        status = "Em Continuo";
-                        break;
-                    case INFECTED:
-                        status = "Em Infectado";
-                        break;
-                    case ISOLATION:
-                         status = "Em Isolamento";
-                         break;
-                }
-                System.out.println("Estado: " + status);
-                System.out.println("Tipo de Utilizador: " + buffer.getCargo());
-                System.out.println("GeneratedIds: {");
-                for (String stringBuffer : buffer.getGeneraredIDs()){
-                    System.out.println("'"  + stringBuffer + "'");
-                }
-                System.out.println("}");
-                System.out.println("RecivedIDs: {");
-                for (String stringBuffer : buffer.getRecivedIDs()){
-                    System.out.println("'"  + stringBuffer + "'");
-                }
-                System.out.println("}");
-                System.out.println("-------------------------------------------------");
-            }
-            System.out.println("prima 'enter' para continuar");
-            this.inputReader.nextLine();
-            menuHandler();
-        }
-        else{
+        }else{
             System.out.println("Opção Inválida, tente novamente (prima 'enter' para continuar)");
             this.inputReader.nextLine();
             menuHandler();

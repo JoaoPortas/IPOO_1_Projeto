@@ -13,10 +13,6 @@ import java.util.HashSet;
  */
 public class AppStart {
 
-    /**
-     * @param args the command line arguments
-     */
-    
     
     /*Teste Push
      *k
@@ -47,7 +43,7 @@ public class AppStart {
     }
 
     public void joao(){
-        test();
+        this.mainMenu.enableMenu();
         /*
         
         Classroom classroom = new Classroom(3,3,this.basededados,"F251");
