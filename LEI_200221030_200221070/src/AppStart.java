@@ -43,7 +43,7 @@ public class AppStart {
     }
 
     public void joao(){
-        this.mainMenu.enableMenu();
+        test();
         /*
         
         Classroom classroom = new Classroom(3,3,this.basededados,"F251");
@@ -74,7 +74,6 @@ public class AppStart {
 
      public void test(){
         Classroom test = new Classroom(5,5,this.basededados,"TestRoom");
-        test.drawMap();
         User[] testUsers = new User[25];
         for (int a = 0; a < 25;a++){
             User buffer = new User(200221030 + a,UserState.CONTINUOUS,Cargos.Aluno);

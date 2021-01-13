@@ -23,8 +23,6 @@ public class User {
     private String currentIDToCast;
     private Cargos cargo;
     private String dateOfChangedStatus;
-    private ArrayList<String> generatedIds;
-    private ArrayList<String> recivedIds;
 
 
 
